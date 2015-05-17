@@ -112,15 +112,15 @@ app.controller("LeftSideBarCtrl", function ($scope, $rootScope, $http) {
 
     ];
 
-    $scope.loadCategories = function () {
-        $http.get('http://localhost:8080/gs-1.0-SNAPSHOT/rest/category').
-                success(function (data, status, headers, config) {
-                    $scope.categories = data;
-                }).
-                error(function (data, status, headers, config) {
-                    // log error
-                });
-    };
-    
-    $scope.loadCategories();
+//    $scope.loadCategories = function () {
+//        $http.get('http://localhost:8080/gs-1.0-SNAPSHOT/rest/category').
+//                success(function (data, status, headers, config) {
+//                    $scope.categories = data;
+//                }).
+//                error(function (data, status, headers, config) {
+//                    // log error
+//                });
+//    };
+
+//    $scope.loadCategories();
 });
