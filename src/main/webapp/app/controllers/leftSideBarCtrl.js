@@ -3,11 +3,23 @@ app.controller("LeftSideBarCtrl", function ($scope, $rootScope, $http) {
 
     $scope.init = function () {
         $scope.categories = [];
+        $scope.brands = [];
     };
-
+$scope.init();
+    $scope.brands = [
+    {
+        name: "Tommy Hill",
+        noOfItems: 50
+    },
+    {
+        name: "Hugo Boss",
+        noOfItems: 30
+    }
+];
     $scope.categories = [
         {
             name: "Sportswear",
+            id: 15,
             subCategories: [
                 {
                     name: "Nike"
@@ -107,20 +119,21 @@ app.controller("LeftSideBarCtrl", function ($scope, $rootScope, $http) {
         },
         {
             name: "SHOES",
+            id:12,
             subCategories: []
         }
 
     ];
 
-//    $scope.loadCategories = function () {
-//        $http.get('http://localhost:8080/gs-1.0-SNAPSHOT/rest/category').
-//                success(function (data, status, headers, config) {
-//                    $scope.categories = data;
-//                }).
-//                error(function (data, status, headers, config) {
-//                    // log error
-//                });
-//    };
+  $scope.loadCategories = function () {
+      $http.get('http://localhost:8080/gihans-e-shoping/rest/category').
+              success(function (data, status, headers, config) {
+                  $scope.categories = data;
+              }).
+               error(function (data, status, headers, config) {
+                   // log error
+               });
+   };
 
-//    $scope.loadCategories();
+    $scope.loadCategories();
 });

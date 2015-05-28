@@ -68,7 +68,7 @@ public class CategoryFacadeREST extends AbstractFacade<Category> {
     public List<Category> findAll() {
         System.out.println(" here ");
         final List<Category> findAll = super.findAll();
-        System.out.println(" --- " + findAll.get(0).getSubCategories().get(0).getParent().getSubCategories());
+//        System.out.println(" --- " + findAll.get(0).getSubCategories().get(0).getParent().getSubCategories());
         for (Category c : findAll) {
             System.out.println(" c " + c.getName() + " - sub " + c.getSubCategories().size());
         //ReflectUtilsHelper.setFieldValue(c, "subCategories[].parent.subCategories", null);
