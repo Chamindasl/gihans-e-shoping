@@ -10,7 +10,7 @@ app.config(['$routeProvider',
                     templateUrl: 'views/index.html',
                     controller: 'IndexCtrl'
                 }).
-                when('/p2', {
+                when('/cart', {
                     templateUrl: 'views/cart.html',
                     controller: 'IndexCtrl'
                 }).
