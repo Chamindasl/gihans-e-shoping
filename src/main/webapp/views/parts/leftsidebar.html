@@ -1,9 +1,9 @@
-<div class="col-sm-3" ng-controller="LeftSideBarCtrl">
+<div class="col-sm-3" ng-controller="IndexCtrl">
     <div class="left-sidebar">
         <h2>Category</h2>
         <div class="panel-group category-products" id="accordian"><!--category-productsr-->
             <div class="panel panel-default">
-               <div class="panel-heading" ng-repeat-start="c in categories">
+               <div class="panel-heading" ng-repeat-start="c in indexVO.categories">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordian" href="#{{c.name}}">
                             <span class="badge pull-right"><i ng-class="{true:'fa fa-plus', false:'fa'}[c.subCategories.length>0]"></i></span>
@@ -11,10 +11,10 @@
                         </a>
                     </h4>
                 </div>
-                <div id="{{c.name}}" class="panel-collapse collapse" ng-repeat-end>
+                <div id="{{c.name}}" ng-class="c.selected ? 'panel-collapse in' : 'panel-collapse collapse'" ng-repeat-end>
                     <div class="panel-body">
                         <ul ng-repeat="sc in c.subCategories">
-                            <li><a href="#">{{sc.name}} </a></li>                            
+                            <li><a href="#" ng-click="selectCagetory(c);">{{sc.name}} </a></li>                            
                         </ul>
                     </div>
                 </div>

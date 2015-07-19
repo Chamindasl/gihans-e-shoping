@@ -6,7 +6,6 @@
 package com.gihans.gs.service.rest;
 
 import com.gihans.gs.model.Category;
-import com.gihans.gs.utils.ReflectUtilsHelper;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

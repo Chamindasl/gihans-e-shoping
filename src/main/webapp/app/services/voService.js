@@ -1,22 +1,58 @@
-'use strict';
-app.controller("LeftSideBarCtrl", function ($scope, $rootScope, $http) {
+app.service('voService', function () {
+    var indexVO = {
 
-    $scope.init = function () {
-        $scope.categories = [];
-        $scope.brands = [];
-    };
-    $scope.init();
-    $scope.brands = [
-        {
-            name: "Tommy Hill",
-            noOfItems: 50
+        selectedCategory: {
+            id: 1,
+            name: "Cat 2"
         },
-        {
-            name: "Hugo Boss",
-            noOfItems: 30
-        }
-    ];
-    $scope.categories = [
+
+        featuredItems: [{
+                id: 1,
+                name: "Item 1",
+                price: 1.50,
+                image: "app/assets/img/home/product1.jpg",
+                fresh: true,
+                sale: false
+            },
+            {
+                id: 1,
+                name: "Item 1",
+                price: 1.50,
+                image: "app/assets/img/home/product1.jpg",
+                fresh: false,
+                sale: true
+            },
+            {
+                id: 1,
+                name: "Item 1",
+                price: 1.50,
+                image: "app/assets/img/home/product1.jpg",
+                fresh: false,
+                sale: false
+            },
+            {
+                id: 1,
+                name: "Item 1",
+                price: 1.50,
+                image: "app/assets/img/home/product1.jpg",
+                fresh: false,
+                sale: false
+            }
+        ],
+        
+        recommendedItems: [{
+                id: 3,
+                name: "Item 3"
+            },
+            {
+                id: 4,
+                name: "Item 4"
+            }
+        ],
+
+        cartItems : [],
+        
+        categories : [
         {
             name: "Sportswear",
             id: 15,
@@ -40,6 +76,7 @@ app.controller("LeftSideBarCtrl", function ($scope, $rootScope, $http) {
         },
         {
             name: "Women",
+            selected : true,
             subCategories: [
                 {
                     name: "FENDI"
@@ -122,18 +159,15 @@ app.controller("LeftSideBarCtrl", function ($scope, $rootScope, $http) {
             id: 12,
             subCategories: []
         }
+    ]
 
-    ];
-
-    $scope.loadCategories = function () {
-        $http.get('http://localhost:8080/gihans-e-shoping/rest/category').
-                success(function (data, status, headers, config) {
-                    $scope.categories = data;
-                }).
-                error(function (data, status, headers, config) {
-                    // log error
-                });
     };
 
-    $scope.loadCategories();
+    this.getIndexVO = function () {
+        return indexVO;
+    };
+
+    this.setIndexVO = function (ivo) {
+        indexVO = ivo;
+    };
 });

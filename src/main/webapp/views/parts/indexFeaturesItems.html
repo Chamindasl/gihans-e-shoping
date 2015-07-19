@@ -1,0 +1,23 @@
+<div class="features_items" ng-controller="IndexCtrl"><!--features_items-->
+    <h2 class="title text-center">Features Items</h2>
+    <div class="col-sm-4"  ng-repeat="fi in indexVO.featuredItems">
+        <div class="product-image-wrapper">
+            <div class="single-products">
+                <div class="productinfo text-center">
+                    <img src="{{fi.image}}" alt="" />
+                    <h2>Rs. {{fi.price}}</h2>
+                    <p>{{fi.name}}</p>
+                    <a href="#" class="btn btn-default add-to-cart" ng-click="addToCart(fi);"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                </div>
+                <img src="app/assets/img/home/new.png" class="new" alt="" ng-show="{{fi.fresh}}"/>
+                <img src="app/assets/img/home/sale.png" class="new" alt="" ng-show="{{fi.sale}}"/>
+            </div>
+            <div class="choose">
+                <ul class="nav nav-pills nav-justified">
+                    <li><a href="#" ng-click="addToCart(fi);"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div><!--features_items-->

@@ -10,71 +10,47 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonManagedReference;
 
 /**
  *
  * @author echamam
  */
 @Entity
-@Table(name = "category")
-//@XmlRootElement
+@Table(name = "brand")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
-    @NamedQuery(name = "Category.findById", query = "SELECT c FROM Category c WHERE c.id = :id"),
-    @NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :name")})
-public class Category implements Serializable {
+    @NamedQuery(name = "Brand.findAll", query = "SELECT b FROM Brand b"),
+    @NamedQuery(name = "Brand.findById", query = "SELECT b FROM Brand b WHERE b.id = :id"),
+    @NamedQuery(name = "Brand.findByName", query = "SELECT b FROM Brand b WHERE b.name = :name")})
+public class Brand implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
+    @Size(max = 200)
     @Column(name = "name")
     private String name;
-
-    @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
-    @JsonManagedReference("p")
-    private List<Category> subCategories;
-
-    @JoinColumn(name = "parent", referencedColumnName = "id")
-    @ManyToOne
-    @JsonBackReference("p")
-    private Category parent;
-
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "brand")
     private List<Item> itemList;
 
-    public Category() {
+    public Brand() {
     }
 
-    public Category(Integer id) {
+    public Brand(Integer id) {
         this.id = id;
-    }
-
-    public Category(Integer id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public Integer getId() {
@@ -93,23 +69,8 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-//    @XmlTransient
-    public List<Category> getSubCategories() {
-        return subCategories;
-    }
-
-    public void setSubCategories(List<Category> subCategories) {
-        this.subCategories = subCategories;
-    }
-
-    public Category getParent() {
-        return parent;
-    }
-
-    public void setParent(Category parent) {
-        this.parent = parent;
-    }
-
+    @XmlTransient
+    @JsonIgnore
     public List<Item> getItemList() {
         return itemList;
     }
@@ -128,10 +89,10 @@ public class Category implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Category)) {
+        if (!(object instanceof Brand)) {
             return false;
         }
-        Category other = (Category) object;
+        Brand other = (Brand) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -140,7 +101,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "com.gihans.gs.model.Category[ id=" + id + " ]";
+        return "com.gihans.gs.model.Brand[ id=" + id + " ]";
     }
     
 }

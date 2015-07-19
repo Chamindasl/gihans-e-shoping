@@ -23,6 +23,7 @@ public class GSAppConfig extends Application {
     static {
         HashSet<Class<?>> tmp = new HashSet<Class<?>>();
         tmp.add(CategoryFacadeREST.class);
+        tmp.add(IndexRest.class);
 
         CLASSES = Collections.unmodifiableSet(tmp);
     }
