@@ -1,33 +1,35 @@
 'use strict';
-app.controller("IndexCtrl", function ($scope, $rootScope, $http, voService) {
+app.controller("IndexCtrl", ['$scope', '$rootScope', '$http', 'voService', 
 
-    $scope.init = function () {
-        $scope.indexVO = voService.getIndexVO();
-    };
+    function ($scope, $rootScope, $http, voService) {
 
-    $scope.init();
+        $scope.init = function () {
+            $scope.indexVO = voService.getIndexVO();
+        };
 
-    $scope.loadCategories = function () {
-        $http.get('http://localhost:8080/gihans-e-shoping/rest/category').
-                success(function (data, status, headers, config) {
-                    $scope.categories = data;
-                }).
-                error(function (data, status, headers, config) {
-                    // log error
-                });
-    };
+        $scope.init();
 
-    $scope.loadCategories();
+        $scope.loadCategories = function () {
+            $http.get('http://localhost:8080/gihans-e-shoping/rest/category').
+                    success(function (data, status, headers, config) {
+                        $scope.categories = data;
+                    }).
+                    error(function (data, status, headers, config) {
+                        // log error
+                    });
+        };
 
-    $scope.selectCagetory = function (category) {
-        delete $scope.indexVO.selectedCategory.selected;
-        category.selected = true;
-        $scope.indexVO.selectedCategory = category;
-        console.log($scope.indexVO);
-    }
-    
-    $scope.addToCart = function (item) {
-        $scope.indexVO.cartItems.push(item);
-        console.log($scope.indexVO);
-    }
-});
+       // $scope.loadCategories();
+
+        $scope.selectCagetory = function (category) {
+            delete $scope.indexVO.selectedCategory.selected;
+            category.selected = true;
+            $scope.indexVO.selectedCategory = category;
+            console.log($scope.indexVO);
+        };
+
+        $scope.addToCart = function (item) {
+            $scope.indexVO.cartItems.push(item);
+            console.log($scope.indexVO);
+        };
+    }]);
