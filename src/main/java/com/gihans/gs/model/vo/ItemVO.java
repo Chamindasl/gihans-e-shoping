@@ -13,7 +13,8 @@ public class ItemVO {
 
     public long id;
     public String name;
-    public String image;
+    public String indexImage;
+    public String cartImage;
     public boolean fresh;
     public boolean sale;
     public double price;

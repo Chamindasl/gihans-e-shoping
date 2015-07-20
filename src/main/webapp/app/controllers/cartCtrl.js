@@ -27,4 +27,11 @@ app.controller("CartCtrl", ['$scope', '$rootScope', '$http', 'voService',
       }
     };
 
+    $scope.getCartTotal = function () {
+      var total = 0;
+      for (var i = 0; i < $scope.indexVO.cartItems.length; i++) {
+        total += ($scope.indexVO.cartItems[i].noOfItems * $scope.indexVO.cartItems[i].price);
+      }
+      return total;
+    }
   }]);

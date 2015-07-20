@@ -10,7 +10,8 @@ app.service('voService', function () {
                 id: 1,
                 name: "Item 1",
                 price: 1.50,
-                image: "app/assets/img/home/product1.jpg",
+                indexImage: "app/assets/img/home/product1.jpg",
+                cartImage: "app/assets/img/cart/one.png",
                 fresh: true,
                 sale: false
             },
@@ -18,7 +19,8 @@ app.service('voService', function () {
                 id: 2,
                 name: "Item 1",
                 price: 1.50,
-                image: "app/assets/img/home/product1.jpg",
+                indexImage: "app/assets/img/home/product2.jpg",
+                cartImage: "app/assets/img/cart/two.png",
                 fresh: false,
                 sale: true
             },
@@ -26,7 +28,8 @@ app.service('voService', function () {
                 id: 3,
                 name: "Item 1",
                 price: 1.50,
-                image: "app/assets/img/home/product1.jpg",
+                indexImage: "app/assets/img/home/product1.jpg",
+                cartImage: "app/assets/img/cart/one.png",
                 fresh: false,
                 sale: false
             },
@@ -34,7 +37,8 @@ app.service('voService', function () {
                 id: 4,
                 name: "Item 1",
                 price: 1.50,
-                image: "app/assets/img/home/product1.jpg",
+                indexImage: "app/assets/img/home/product1.jpg",
+                cartImage: "app/assets/img/cart/one.png",
                 fresh: false,
                 sale: false
             }
