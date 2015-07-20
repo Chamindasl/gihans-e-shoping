@@ -15,7 +15,7 @@ app.service('voService', function () {
                 sale: false
             },
             {
-                id: 1,
+                id: 2,
                 name: "Item 1",
                 price: 1.50,
                 image: "app/assets/img/home/product1.jpg",
@@ -23,7 +23,7 @@ app.service('voService', function () {
                 sale: true
             },
             {
-                id: 1,
+                id: 3,
                 name: "Item 1",
                 price: 1.50,
                 image: "app/assets/img/home/product1.jpg",
@@ -31,7 +31,7 @@ app.service('voService', function () {
                 sale: false
             },
             {
-                id: 1,
+                id: 4,
                 name: "Item 1",
                 price: 1.50,
                 image: "app/assets/img/home/product1.jpg",
@@ -41,11 +41,11 @@ app.service('voService', function () {
         ],
         
         recommendedItems: [{
-                id: 3,
+                id: 5,
                 name: "Item 3"
             },
             {
-                id: 4,
+                id: 6,
                 name: "Item 4"
             }
         ],

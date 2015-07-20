@@ -7,6 +7,10 @@ package com.gihans.gs.service.rest;
 
 import com.gihans.gs.model.Category;
 import com.gihans.gs.model.vo.IndexVO;
+import com.gihans.gs.model.vo.ItemVO;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,7 +34,17 @@ public class IndexRest {
     @POST
     @Consumes({"application/json"})
     @Produces({"application/json"})
-    public IndexVO create(IndexVO indexVO) {
+    @Path("addToCart")
+    public IndexVO addToCart(final IndexVO indexVO) {
+        final Map<Long, ItemVO> cartItems = new HashMap<>();
+        for (final ItemVO itemVO : indexVO.cartItems) {
+            if (null == cartItems.get(itemVO.id)) {
+                cartItems.put(itemVO.id, itemVO);
+            } else {
+                cartItems.get(itemVO.id).noOfItems += itemVO.noOfItems; 
+            }
+        }
+        indexVO.cartItems = new ArrayList<>(cartItems.values());
         return indexVO;
     }
 

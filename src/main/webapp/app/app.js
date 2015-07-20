@@ -12,7 +12,7 @@ app.config(['$routeProvider',
                 }).
                 when('/cart', {
                     templateUrl: 'views/cart.html',
-                    controller: 'IndexCtrl'
+                    controller: 'CartCtrl'
                 }).
                 otherwise({
                     redirectTo: '/index'

@@ -12,5 +12,6 @@ import java.util.List;
  * @author echamam
  */
 public class CategoryVO extends IdNameVO {
+    public boolean selected;
     public List<CategoryVO> subCategories;
 }
