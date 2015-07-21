@@ -19,7 +19,7 @@ app.controller("CartCtrl", ['$scope', '$rootScope', '$http', 'voService',
     };
 
     $scope.remveFromCart = function (item) {
-     for (var i=0; i < $scope.indexVO.cartItems.length; i++) {
+      for (var i = 0; i < $scope.indexVO.cartItems.length; i++) {
         if ($scope.indexVO.cartItems[i].id === item.id) {
           $scope.indexVO.cartItems.splice(i, 1);
           break;
@@ -33,5 +33,28 @@ app.controller("CartCtrl", ['$scope', '$rootScope', '$http', 'voService',
         total += ($scope.indexVO.cartItems[i].noOfItems * $scope.indexVO.cartItems[i].price);
       }
       return total;
-    }
+    };
+
+    $scope.mymodel = function () {
+      $(function () {
+        $("#dialog").dialog({
+          autoOpen: false,
+          show: {
+            effect: "blind",
+            duration: 1000
+          },
+          hide: {
+            effect: "explode",
+            duration: 1000
+          }
+        });
+
+        $("#opener").click(function () {
+          $("#dialog").dialog("open");
+        });
+      });
+    };
+    
+    $scope.mymodel();
+
   }]);
