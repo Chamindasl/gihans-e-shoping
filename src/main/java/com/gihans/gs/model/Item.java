@@ -6,6 +6,7 @@
 package com.gihans.gs.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -19,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -42,19 +45,38 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     @NamedQuery(name = "Item.findByStock", query = "SELECT i FROM Item i WHERE i.stock = :stock"),
     @NamedQuery(name = "Item.findByActive", query = "SELECT i FROM Item i WHERE i.active = :active")})
 public class Item implements Serializable {
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "price")
+    private Double price;
+    @Column(name = "featured")
+    private Boolean featured;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+    @Size(max = 300)
+    @Column(name = "mainImage")
+    private String mainImage;
+    @Size(max = 300)
+    @Column(name = "indexImage")
+    private String indexImage;
+    @Size(max = 300)
+    @Column(name = "cartImage")
+    private String cartImage;
+    @Size(max = 300)
+    @Column(name = "description")
+    private String description;
+    @Column(name = "startFrom")
+    @Temporal(TemporalType.DATE)
+    private Date startFrom;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "name")
     private String name;
-    @Column(name = "price")
-    private Long price;
     @Column(name = "fresh")
     private Boolean fresh;
     @Column(name = "onSale")
@@ -100,14 +122,6 @@ public class Item implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getPrice() {
-        return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
     }
 
     public Boolean getFresh() {
@@ -179,6 +193,52 @@ public class Item implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "com.gihans.gs.model.Item[ id=" + id + " ]";
+    }
+
+
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
+    }
+
+    public String getIndexImage() {
+        return indexImage;
+    }
+
+    public void setIndexImage(String indexImage) {
+        this.indexImage = indexImage;
+    }
+
+    public String getCartImage() {
+        return cartImage;
+    }
+
+    public void setCartImage(String cartImage) {
+        this.cartImage = cartImage;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getStartFrom() {
+        return startFrom;
+    }
+
+    public void setStartFrom(Date startFrom) {
+        this.startFrom = startFrom;
+    }
+
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
@@ -198,9 +258,20 @@ public class Item implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.gihans.gs.model.Item[ id=" + id + " ]";
+    public Double getPrice() {
+        return price;
     }
-    
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Boolean getFeatured() {
+        return featured;
+    }
+
+    public void setFeatured(Boolean featured) {
+        this.featured = featured;
+    }
+
 }

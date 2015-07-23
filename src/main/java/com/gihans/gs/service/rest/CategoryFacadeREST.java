@@ -6,6 +6,8 @@
 package com.gihans.gs.service.rest;
 
 import com.gihans.gs.model.Category;
+import com.gihans.gs.model.vo.CategoryVO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -27,7 +29,7 @@ import javax.ws.rs.Produces;
 @Path("category")
 public class CategoryFacadeREST extends AbstractFacade<Category> {
 
-    @PersistenceContext(unitName = "com.gihans_gs_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName = "gihans_PU")
     private EntityManager em;
 
     public CategoryFacadeREST() {

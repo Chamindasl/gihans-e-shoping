@@ -1,0 +1,93 @@
+<div id="contact-page" class="container">
+  <div class="bg">
+    <div class="row">  	
+      <div class="col-sm-12">
+        <div class="contact-form" ng-controller="ItemCtrl" >
+          <h2 class="title text-center">Add New Item</h2>
+          <div class="status alert alert-success" style="display: none">Something</div>
+          <form ng-submit="submit()" class="form-horizontal" role="form" method="POST" action="/gihans-e-shoping/rest/item/create" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="name" class="col-sm-2 control-label">Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="price" class="col-sm-2 control-label">Price</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="price" placeholder="Price" min="0" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="stock" class="col-sm-2 control-label">Stock</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="stock" placeholder="Price" min="0" step="1" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="stock" class="col-sm-2 control-label">Available From</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" id="date" name="startFrom">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="category" class="col-sm-2 control-label">Category</label>
+              <div class="col-sm-10">
+                <select id="category" name="category" class="form-control" ng-model="selectedCategory" required ng-options="c.name for c in categories"></select>
+              </div>
+              <!--              <select ng-model="myColor" ng-options="color.name for color in colors">
+                    <option value="">-- choose color --</option>
+                  </select>-->
+            </div>
+            <div class="form-group">
+              <label for="subCategory" class="col-sm-2 control-label">Sub Category</label>
+              <div class="col-sm-10">
+                <select id="subCategory" name="subCategory" ng-model="selectedSubCategory"  class="form-control" required ng-options="c.name for c in selectedCategory.subCategories">
+                  <option value="">--- Select (Optional) ---</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="option1">
+                  New
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="option2">
+                  Featured
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="option3">
+                  On Sale
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Main Image </label> 
+              <div class="col-sm-4">
+                <input type="file" name="mainImage" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Index Image </label> 
+              <div class="col-sm-4">
+                <input type="file" name="indexImage" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Cart Image </label> 
+              <div class="col-sm-4">
+                <input type="file" name="cartImage" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group col-md-12">
+              <input type="submit" name="submit" class="btn btn-primary pull-right" value="Submit">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>  
+  </div>	
+</div>

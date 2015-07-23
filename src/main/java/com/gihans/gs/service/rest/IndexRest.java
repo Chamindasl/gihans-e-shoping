@@ -28,7 +28,7 @@ import javax.ws.rs.Produces;
 @Path("index")
 public class IndexRest {
 
-    @PersistenceContext(unitName = "com.gihans_gs_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName = "gihans_PU")
     private EntityManager em;
 
     @POST

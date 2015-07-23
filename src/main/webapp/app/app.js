@@ -14,6 +14,10 @@ app.config(['$routeProvider',
                     templateUrl: 'views/cart.html',
                     controller: 'CartCtrl'
                 }).
+                when('/add-item', {
+                    templateUrl: 'views/add-item.html',
+                    controller: 'ItemCtrl'
+                }).
                 otherwise({
                     redirectTo: '/index'
                 });

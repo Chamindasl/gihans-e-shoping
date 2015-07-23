@@ -5,7 +5,7 @@
             <div class="panel panel-default">
                <div class="panel-heading" ng-repeat-start="c in indexVO.categories">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordian" href="#{{c.name}}">
+                        <a data-toggle="collapse" data-parent="#accordian" href="" ng-click="selectCagetory(c);">
                             <span class="badge pull-right"><i ng-class="{true:'fa fa-plus', false:'fa'}[c.subCategories.length>0]"></i></span>
                             {{c.name}}  - {{c.id}}
                         </a>
@@ -14,7 +14,7 @@
                 <div id="{{c.name}}" ng-class="c.selected ? 'panel-collapse in' : 'panel-collapse collapse'" ng-repeat-end>
                     <div class="panel-body">
                         <ul ng-repeat="sc in c.subCategories">
-                            <li><a href="#" ng-click="selectCagetory(c);">{{sc.name}} </a></li>                            
+                            <li><a href="" ng-click="selectCagetory(c);">{{sc.name}} </a></li>                            
                         </ul>
                     </div>
                 </div>
