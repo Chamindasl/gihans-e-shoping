@@ -15,13 +15,13 @@
             <div class="form-group">
               <label for="price" class="col-sm-2 control-label">Price</label>
               <div class="col-sm-10">
-                <input type="number" class="form-control" id="price" placeholder="Price" min="0" required>
+                <input name="price" type="number" class="form-control" id="price" placeholder="Price" min="0" required>
               </div>
             </div>
             <div class="form-group">
               <label for="stock" class="col-sm-2 control-label">Stock</label>
               <div class="col-sm-10">
-                <input type="number" class="form-control" id="stock" placeholder="Price" min="0" step="1" required>
+                <input name= "stock" type="number" class="form-control" id="stock" placeholder="Price" min="0" step="1" required>
               </div>
             </div>
             <div class="form-group">
@@ -33,32 +33,31 @@
             <div class="form-group">
               <label for="category" class="col-sm-2 control-label">Category</label>
               <div class="col-sm-10">
-                <select id="category" name="category" class="form-control" ng-model="selectedCategory" required ng-options="c.name for c in categories"></select>
+                <select id="category" class="form-control" ng-model="selectedCategory" required ng-options="c.name for c in categories"></select>
               </div>
-              <!--              <select ng-model="myColor" ng-options="color.name for color in colors">
-                    <option value="">-- choose color --</option>
-                  </select>-->
+              <input type="hidden" name="category" value="{{selectedCategory.id}}">
             </div>
             <div class="form-group">
               <label for="subCategory" class="col-sm-2 control-label">Sub Category</label>
               <div class="col-sm-10">
-                <select id="subCategory" name="subCategory" ng-model="selectedSubCategory"  class="form-control" required ng-options="c.name for c in selectedCategory.subCategories">
+                <select id="subCategory" ng-model="selectedSubCategory"  class="form-control" required ng-options="c.name for c in selectedCategory.subCategories">
                   <option value="">--- Select (Optional) ---</option>
                 </select>
+                <input type="hidden" name="subCategory" value="{{selectedSubCategory.id}}">
               </div>
             </div>
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox1" value="option1">
+                  <input name="fresh" type="checkbox" id="inlineCheckbox1" value="true">
                   New
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox2" value="option2">
+                  <input name="featured" type="checkbox" id="inlineCheckbox2" value="true">
                   Featured
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox3" value="option3">
+                  <input name="onSale" type="checkbox" id="inlineCheckbox3" value="true">
                   On Sale
                 </label>
               </div>

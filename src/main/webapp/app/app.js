@@ -18,6 +18,10 @@ app.config(['$routeProvider',
                     templateUrl: 'views/add-item.html',
                     controller: 'ItemCtrl'
                 }).
+                when('/item/set-recommended', {
+                    templateUrl: 'views/set-recommended.html',
+                    controller: 'ItemCtrl'
+                }).
                 otherwise({
                     redirectTo: '/index'
                 });

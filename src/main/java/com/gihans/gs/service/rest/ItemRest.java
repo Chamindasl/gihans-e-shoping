@@ -7,6 +7,7 @@ package com.gihans.gs.service.rest;
 
 import com.gihans.gs.model.Category;
 import com.gihans.gs.model.Item;
+import com.gihans.gs.model.vo.ItemVO;
 import com.gihans.gs.utils.StringUtils;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,8 +21,11 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import org.apache.commons.io.IOUtils;
@@ -73,6 +77,15 @@ public class ItemRest {
             return Response.serverError().build();
         }
         
+    }
+
+    @GET
+    @Path("get")
+    @Produces("application/json")
+    public ItemVO getItem(@QueryParam(value = "id") final long id) {
+        final Item item = em.find(Item.class, id);
+        final ItemVO itemVO = new ItemVO(item);
+        return itemVO;
     }
 
     private String saveImageAndGetPath(final Long id, final MultipartFormDataInput input, final String img) {
