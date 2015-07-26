@@ -22,6 +22,10 @@ app.config(['$routeProvider',
                     templateUrl: 'views/set-recommended.html',
                     controller: 'ItemCtrl'
                 }).
+                when('/category', {
+                    templateUrl: 'views/category.html',
+                    controller: 'CategoryCtrl'
+                }).
                 otherwise({
                     redirectTo: '/index'
                 });

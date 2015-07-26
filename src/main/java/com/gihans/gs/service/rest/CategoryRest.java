@@ -12,7 +12,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
@@ -32,6 +34,19 @@ public class CategoryRest {
             catVos.add(toCategoryVO(c));
         }
         return catVos;
+    }
+
+    @POST
+    @Produces("application/json")
+    @Consumes("application/json")
+    public CategoryVO save(final CategoryVO categoryVO) {
+        final Category category = new Category();
+        category.setName(categoryVO.name);
+        if (null != categoryVO.parentCategory) {
+            category.setParent(em.find(Category.class, Integer.parseInt("" + categoryVO.parentCategory.id)));
+        }
+        em.persist(category);
+        return categoryVO;
     }
 
     private static CategoryVO toCategoryVO(final Category category) {

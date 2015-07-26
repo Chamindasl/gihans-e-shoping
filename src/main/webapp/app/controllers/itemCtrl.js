@@ -17,7 +17,9 @@ app.controller("ItemCtrl", ['$scope', '$rootScope', '$http', 'categoryService', 
       if ($routeParams.item) {
         $scope.loadItem($routeParams.item);
       } else {
-        $scope.categories = categoryService.getAllCategories();
+        categoryService.getAllCategories().then(function (data) {
+          $scope.categories = data;
+        });
       }
     };
 

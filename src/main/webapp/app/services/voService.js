@@ -164,7 +164,7 @@ app.service('voService', function (categoryService) {
 
   this.getIndexVO = function () {
     indexVO.categories = categoryService.getAllCategories();
-    console.log("-" + categoryService.getAllCategories());
+//    console.log("-" + categoryService.getAllCategories());
     return indexVO;
   };
 
