@@ -26,6 +26,10 @@ app.config(['$routeProvider',
                     templateUrl: 'views/category.html',
                     controller: 'CategoryCtrl'
                 }).
+                when('/user', {
+                    templateUrl: 'views/user.html',
+                    controller: 'UserCtrl'
+                }).
                 otherwise({
                     redirectTo: '/index'
                 });
