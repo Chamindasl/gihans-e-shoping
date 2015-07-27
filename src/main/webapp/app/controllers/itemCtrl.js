@@ -2,7 +2,6 @@
 app.controller("ItemCtrl", ['$scope', '$rootScope', '$http', 'categoryService', '$routeParams',
   function ($scope, $rootScope, $http, categoryService, $routeParams) {
 
-
     $scope.loadItem = function (item) {
       $http.get('http://localhost:8080/gihans-e-shoping/rest/item/get?id=' + item).
               success(function (data, status, headers, config) {
