@@ -25,7 +25,7 @@ app.controller("IndexCtrl", ['$scope', '$rootScope', '$http', 'voService', 'cate
     $scope.recommendedItems = function () {
       $http.post('http://localhost:8080/gihans-e-shoping/rest/index/loadRelatedItems', $scope.indexVO)
               .success(function (data, status, header, config) {
-//                $scope.indexVO.recommendedItems = data.recommendedItems;
+                $scope.indexVO.recommendedItems = data.recommendedItems;
                 $scope.chunked = chunk($scope.indexVO.recommendedItems, 3)
               })
               .error(function (data, status, header, config) {
