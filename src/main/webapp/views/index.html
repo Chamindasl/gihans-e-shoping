@@ -56,12 +56,6 @@
                 <img src="app/assets/img/home/new.png" class="new" alt="" ng-show="{{fi.fresh}}"/>
                 <img src="app/assets/img/home/sale.png" class="new" alt="" ng-show="{{fi.sale}}"/>
               </div>
-              <div class="choose">
-                <ul class="nav nav-pills nav-justified">
-                  <li><a href="" ng-click="addToCart(fi);"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                  <li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
-                </ul>
-              </div>
             </div>
           </div>
         </div><!--features_items-->
@@ -83,6 +77,8 @@
                         <p>{{i.name}}</p>
                         <a href="" class="btn btn-default add-to-cart" ng-click="addToCart(i);"><i class="fa" ng-class="{'fa-check-circle text-success' : i.inCart}"></i><i class="fa fa-shopping-cart"></i>Add to cart</a>
                       </div>
+                      <img src="app/assets/img/home/new.png" class="new" alt="" ng-show="{{fi.fresh}}"/>
+                      <img src="app/assets/img/home/sale.png" class="new" alt="" ng-show="{{fi.sale}}"/>
                     </div>
                   </div>
                 </div>
@@ -97,6 +93,8 @@
                         <p>{{i.name}}</p>
                         <a href="" class="btn btn-default add-to-cart" ng-click="addToCart(i);"><i class="fa" ng-class="{'fa-check-circle text-success' : i.inCart}"></i><i class="fa fa-shopping-cart"></i>Add to cart</a>
                       </div>
+                      <img src="app/assets/img/home/new.png" class="new" alt="" ng-show="{{fi.fresh}}"/>
+                      <img src="app/assets/img/home/sale.png" class="new" alt="" ng-show="{{fi.sale}}"/>
                     </div>
                   </div>                
                 </div>

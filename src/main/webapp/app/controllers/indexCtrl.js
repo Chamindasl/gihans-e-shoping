@@ -40,7 +40,6 @@ app.controller("IndexCtrl", ['$scope', '$rootScope', '$http', 'voService', 'cate
     };
 
     $scope.init = function () {
-//      $scope.indexVO = voService.getIndexVO();
       $scope.indexVO = {};
       $scope.loadIndexVO();
     };

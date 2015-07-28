@@ -72,7 +72,7 @@ public class IndexRest {
     public IndexVO loadRelatedItems(final IndexVO indexVO) {
         final Set<Item> relatedItemSet = new HashSet<>();
         final List<ItemVO> currentRelated = new ArrayList(indexVO.recommendedItems);
-        final List<ItemVO> result = new ArrayList<>();
+        final Set<ItemVO> result = new HashSet<>();
         if (null != indexVO.addedItemVO) {
             final List<Item> relatedItems = em.find(Item.class, Long.valueOf("" + indexVO.addedItemVO.id)).getRelatedItems();
             relatedItemSet.addAll(relatedItems);
@@ -84,8 +84,8 @@ public class IndexRest {
         for (final Item i : relatedItemSet) {
             result.add(new ItemVO(i));
         }
-        result.addAll(currentRelated);
-        indexVO.recommendedItems = result;
+        //result.addAll(currentRelated);
+        indexVO.recommendedItems = new ArrayList<>(result);
         return indexVO;
     }
 
