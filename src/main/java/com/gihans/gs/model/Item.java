@@ -15,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,8 +27,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -45,7 +45,9 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     @NamedQuery(name = "Item.findByStock", query = "SELECT i FROM Item i WHERE i.stock = :stock"),
     @NamedQuery(name = "Item.findByActive", query = "SELECT i FROM Item i WHERE i.active = :active")})
 public class Item implements Serializable {
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+
     @Column(name = "price")
     private Double price;
     @Column(name = "featured")
@@ -91,10 +93,17 @@ public class Item implements Serializable {
     @JoinColumn(name = "category", referencedColumnName = "id")
     @ManyToOne
     private Category category;
-    @OneToMany(mappedBy = "relatedItem")
-    private List<RelatedItem> relatedItemList;
-    @OneToMany(mappedBy = "item")
-    private List<RelatedItem> relatedItemList1;
+//    @OneToMany(mappedBy = "relatedItem")
+//    private List<RelatedItem> relatedItemList;
+
+    @OneToMany()
+    @JoinTable(
+            name = "related_item",
+            joinColumns = {
+                @JoinColumn(name = "item", referencedColumnName = "ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "related_item", referencedColumnName = "ID")})
+    private List<Item> relatedItems;
 
     public Item() {
     }
@@ -172,31 +181,18 @@ public class Item implements Serializable {
         this.category = category;
     }
 
-    @XmlTransient
-    @JsonIgnore
-    public List<RelatedItem> getRelatedItemList() {
-        return relatedItemList;
-    }
-
-    public void setRelatedItemList(List<RelatedItem> relatedItemList) {
-        this.relatedItemList = relatedItemList;
-    }
-
-    @XmlTransient
-    @JsonIgnore
-    public List<RelatedItem> getRelatedItemList1() {
-        return relatedItemList1;
-    }
-
-    public void setRelatedItemList1(List<RelatedItem> relatedItemList1) {
-        this.relatedItemList1 = relatedItemList1;
-    }
-
+//    public List<RelatedItem> getRelatedItemList() {
+//        return relatedItemList;
+//    }
+//
+//    public void setRelatedItemList(List<RelatedItem> relatedItemList) {
+//        this.relatedItemList = relatedItemList;
+//    }
+//
     @Override
     public String toString() {
         return "com.gihans.gs.model.Item[ id=" + id + " ]";
     }
-
 
     public String getMainImage() {
         return mainImage;
@@ -238,6 +234,30 @@ public class Item implements Serializable {
         this.startFrom = startFrom;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Boolean getFeatured() {
+        return featured;
+    }
+
+    public void setFeatured(Boolean featured) {
+        this.featured = featured;
+    }
+
+    public List<Item> getRelatedItems() {
+        return relatedItems;
+    }
+
+    public void setRelatedItems(List<Item> relatedItems) {
+        this.relatedItems = relatedItems;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -257,21 +277,5 @@ public class Item implements Serializable {
         }
         return true;
     }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Boolean getFeatured() {
-        return featured;
-    }
-
-    public void setFeatured(Boolean featured) {
-        this.featured = featured;
-    }
-
+ 
 }

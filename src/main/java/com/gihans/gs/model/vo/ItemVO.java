@@ -23,6 +23,7 @@ public class ItemVO {
     public boolean sale;
     public double price;
     public int noOfItems;
+    public boolean inCart;
     public CategoryVO categoryVO;
 
     public ItemVO() {
@@ -45,4 +46,27 @@ public class ItemVO {
             this.categoryVO.name = category.getName();
         }
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ItemVO other = (ItemVO) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+    
 }

@@ -1,11 +1,5 @@
 <section id="cart_items" ng-controller="CartCtrl">
   <div class="container">
-    <div class="breadcrumbs">
-      <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li class="active">Shopping Cart</li>
-      </ol>
-    </div>
     <div class="table-responsive cart_info">
       <table class="table table-condensed">
         <thead>
@@ -37,7 +31,7 @@
               </div>
             </td>
             <td class="cart_total">
-              <p class="cart_total_price">Rs. {{ci.noOfItems * ci.price}}</p>
+              <p class="cart_total_price pull-right">Rs. {{ci.noOfItems * ci.price}}</p>
             </td>
             <td class="cart_delete">
               <a class="cart_quantity_delete" href="" ng-click="remveFromCart(ci);"><i class="fa fa-times"></i></a>

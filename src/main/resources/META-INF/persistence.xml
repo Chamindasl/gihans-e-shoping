@@ -6,8 +6,6 @@
         <class>com.gihans.gs.model.Category</class>
         <class>com.gihans.gs.model.Brand</class>
         <class>com.gihans.gs.model.Item</class>
-        <class>com.gihans.gs.model.Relation</class>
-        <class>com.gihans.gs.model.RelatedItem</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

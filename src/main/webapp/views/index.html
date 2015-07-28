@@ -11,14 +11,14 @@
                 <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordian" href="" ng-click="selectCagetory(c);">
                     <span class="badge pull-right"><i ng-class="{true:'fa fa - plus', false:'fa'}[c.subCategories.length > 0]"></i></span>
-                    {{c.name}}  - {{c.id}}
+                    {{c.name}}
                   </a>
                 </h4>
               </div>
               <div id="{{c.name}}" ng-class="c.selected ? 'panel-collapse in' : 'panel - collapse collapse'" ng-repeat-end>
                 <div class="panel-body">
                   <ul ng-repeat="sc in c.subCategories">
-                    <li><a href="" ng-click="selectCagetory(c);">{{sc.name}} </a></li>                            
+                    <li><a href="" ng-click="selectCagetory(sc, c);">{{sc.name}} </a></li>                            
                   </ul>
                 </div>
               </div>
@@ -51,7 +51,7 @@
                   <img src="{{fi.indexImage}}" alt="" />
                   <h2>Rs. {{fi.price}}</h2>
                   <p>{{fi.name}}</p>
-                  <a href="" class="btn btn-default add-to-cart" ng-click="addToCart(fi);"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                  <a href="" class="btn btn-default add-to-cart" ng-click="addToCart(fi);"><i class="fa" ng-class="{'fa-check-circle text-success' : fi.inCart}"></i><i class="fa fa-shopping-cart"></i>Add to cart</a>
                 </div>
                 <img src="app/assets/img/home/new.png" class="new" alt="" ng-show="{{fi.fresh}}"/>
                 <img src="app/assets/img/home/sale.png" class="new" alt="" ng-show="{{fi.sale}}"/>
@@ -66,8 +66,51 @@
           </div>
         </div><!--features_items-->
 
-        <div ng-include src="'views/parts/categoryTab.html'"></div>
-        <div ng-include src="'views/parts/recomnendedItems.html'"></div>
+        <!--        <div ng-include src="'views/parts/categoryTab.html'"></div>-->
+        <div class="recommended_items"><!--recommended_items-->
+          <h2 class="title text-center">recommended items</h2>
+
+          <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+
+              <div class="item active">	
+                <div class="col-sm-4" ng-repeat="i in chunked[0]">
+                  <div class="product-image-wrapper">
+                    <div class="single-products">
+                      <div class="productinfo text-center">
+                        <img src="{{i.cartImage}}" alt="" />
+                        <h2>Rs. {{i.price}}</h2>
+                        <p>{{i.name}}</p>
+                        <a href="" class="btn btn-default add-to-cart" ng-click="addToCart(i);"><i class="fa" ng-class="{'fa-check-circle text-success' : i.inCart}"></i><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item" ng-repeat="row in chunked">	
+                <div class="col-sm-4" ng-repeat="i in row">
+                  <div class="product-image-wrapper">
+                    <div class="single-products">
+                      <div class="productinfo text-center">
+                        <img src="{{i.cartImage}}" alt="" />
+                        <h2>Rs. {{i.price}}</h2>
+                        <p>{{i.name}}</p>
+                        <a href="" class="btn btn-default add-to-cart" ng-click="addToCart(i);"><i class="fa" ng-class="{'fa-check-circle text-success' : i.inCart}"></i><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                      </div>
+                    </div>
+                  </div>                
+                </div>
+              </div>
+            </div>
+            <a class="left recommended-item-control" href="" ng-click="slide('prev')"   data-slide="prev">
+              <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="right recommended-item-control" href="" ng-click="slide('next')"  data-slide="next">
+              <i class="fa fa-angle-right"></i>
+            </a>			
+          </div>
+        </div><!--/recommended_items-->
+
       </div>
     </div>
   </div>

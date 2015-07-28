@@ -958,6 +958,13 @@ h2.title {
   color: #FFFFFF;
 }
 
+.in-cart {
+  background: #FE980F;
+  border: 0 none;
+  border-radius: 0;
+  color: #FFFFFF;
+}
+
 .add-to{
   margin-bottom: 10px;
 }

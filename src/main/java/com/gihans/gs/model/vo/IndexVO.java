@@ -5,6 +5,7 @@
  */
 package com.gihans.gs.model.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,8 +15,9 @@ import java.util.List;
 public class IndexVO {
 
     public CategoryVO selectedCategory;
-    public List<ItemVO> featuredItems;
-    public List<ItemVO> recommendedItems;
-    public List<ItemVO> cartItems;
-    public List<CategoryVO> categories;
+    public List<ItemVO> featuredItems = new ArrayList<>();
+    public List<ItemVO> recommendedItems = new ArrayList<>();
+    public List<ItemVO> cartItems = new ArrayList<>();
+    public List<CategoryVO> categories = new ArrayList<>();
+    public ItemVO addedItemVO;
 }

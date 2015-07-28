@@ -47,7 +47,6 @@ app.controller("CategoryCtrl", ['$scope', '$rootScope', '$http', 'categoryServic
                   // error handler
                 });
       }
-      ;
     };
 
   }]);
