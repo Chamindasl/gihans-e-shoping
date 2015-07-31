@@ -21,4 +21,11 @@ public class CityVO extends IdNameVO {
         this.id = city.getId();
         this.name = city.getName();
     }
+
+    public City toCity() {
+        final City result = new City();
+        result.setId(Integer.parseInt("" + this.id));
+        result.setName(this.name);
+        return result;
+    }
 }

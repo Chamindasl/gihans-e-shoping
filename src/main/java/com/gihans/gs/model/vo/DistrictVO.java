@@ -31,4 +31,10 @@ public class DistrictVO extends IdNameVO {
         }
     }
 
+    public District toDistrict() {
+        final District result = new District();
+        result.setId(Integer.parseInt("" + this.id));
+        result.setName(name);
+        return result;
+    }
 }

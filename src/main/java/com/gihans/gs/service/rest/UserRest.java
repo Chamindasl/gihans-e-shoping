@@ -6,6 +6,8 @@
 package com.gihans.gs.service.rest;
 
 import com.gihans.gs.model.Address;
+import com.gihans.gs.model.City;
+import com.gihans.gs.model.District;
 import com.gihans.gs.model.User;
 import com.gihans.gs.model.vo.UserVO;
 import java.net.URISyntaxException;
@@ -38,6 +40,10 @@ public class UserRest {
             user.setId(null);
             tBill.setId(null);
             tShip.setId(null);
+            tBill.setDistrict(em.find(District.class, tBill.getDistrict().getId()));
+            tShip.setDistrict(em.find(District.class, tShip.getDistrict().getId()));
+            tBill.setCity(em.find(City.class, tBill.getCity().getId()));
+            tShip.setCity(em.find(City.class, tShip.getCity().getId()));
             //tBill.
             em.persist(user);
             em.persist(tBill);

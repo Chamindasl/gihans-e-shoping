@@ -41,6 +41,8 @@ public class AddressVO {
         result.setAddress2(this.address2);
         result.setCompanyAddress(this.business);
         result.setPhone(phone);
+        result.setDistrict(this.district.toDistrict());
+        result.setCity(this.city.toCity());
         return result;
     }
 }

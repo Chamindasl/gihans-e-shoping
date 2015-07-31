@@ -6,16 +6,16 @@
 package com.gihans.gs.model;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -56,16 +56,18 @@ public class Address implements Serializable {
     @Size(max = 200)
     @Column(name = "address_2")
     private String address2;
-    @Column(name = "district")
-    private Integer district;
-    @Column(name = "city")
-    private Integer city;
     @Column(name = "company_address")
     private Boolean companyAddress;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Size(max = 50)
     @Column(name = "phone")
     private String phone;
+    @JoinColumn(name = "city", referencedColumnName = "id")
+    @ManyToOne
+    private City city;
+    @JoinColumn(name = "district", referencedColumnName = "id")
+    @ManyToOne
+    private District district;
 
     public Address() {
     }
@@ -114,20 +116,20 @@ public class Address implements Serializable {
         this.address2 = address2;
     }
 
-    public Integer getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(Integer district) {
-        this.district = district;
-    }
-
-    public Integer getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(Integer city) {
+    public void setCity(City city) {
         this.city = city;
+    }
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
     }
 
     public Boolean getCompanyAddress() {
