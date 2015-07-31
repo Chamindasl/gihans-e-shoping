@@ -35,27 +35,17 @@ app.controller("UserCtrl", ['$scope', '$rootScope', '$http', '$location', 'voSer
       $scope.loadRefData();
       $scope.loadAllUsers();
 
-      $scope.user = {
-        email: "chaminda.sl@gmail.com",
-        displayName: "Chaminda",
-        password: "King1!",
-        confirmPassword: "King1!",
-        firstName: "Chaminda",
-        lastName: "Amarasinghe",
-        phone: "+94718602815",
-        billingAddress: {
-          email: "chaminda.sl@gmail.com",
-          contactPerson: "Mahinda Amarasinghe",
-          address1: "34, Karangamuwa",
-          address2: "Katupotha",
-//          province: {},
-//          district: {},
-//          city: {},
-          phone: "+372247051",
-          business: true
-        }
-//        shipingSameAsBilling: true
-//        shippingAddress: {
+      $scope.user = { };
+      
+//      $scope.user = {
+//        email: "chaminda.sl@gmail.com",
+//        displayName: "Chaminda",
+//        password: "King1!",
+//        confirmPassword: "King1!",
+//        firstName: "Chaminda",
+//        lastName: "Amarasinghe",
+//        phone: "+94718602815",
+//        billingAddress: {
 //          email: "chaminda.sl@gmail.com",
 //          contactPerson: "Mahinda Amarasinghe",
 //          address1: "34, Karangamuwa",
@@ -66,8 +56,20 @@ app.controller("UserCtrl", ['$scope', '$rootScope', '$http', '$location', 'voSer
 //          phone: "+372247051",
 //          business: true
 //        }
-      };
-
+////        shipingSameAsBilling: true
+////        shippingAddress: {
+////          email: "chaminda.sl@gmail.com",
+////          contactPerson: "Mahinda Amarasinghe",
+////          address1: "34, Karangamuwa",
+////          address2: "Katupotha",
+//////          province: {},
+//////          district: {},
+//////          city: {},
+////          phone: "+372247051",
+////          business: true
+////        }
+//      };
+//
     };
 
     $scope.init();
@@ -90,6 +92,12 @@ app.controller("UserCtrl", ['$scope', '$rootScope', '$http', '$location', 'voSer
 
     $scope.finish = function () {
       $scope.saveUser();
+    };
+
+    $scope.editUser = function (user) {
+      $scope.user = user;
+      $scope.step = 1;
+      $location.path("user")
     };
 
     $scope.saveUser = function () {

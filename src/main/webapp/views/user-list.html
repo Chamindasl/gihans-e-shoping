@@ -23,6 +23,7 @@
         <th>Last Name</th>
         <th>Phone</th>
         <th>Role</th>
+        <th>Role</th>
         </thead>
         <tr ng-class="{'success': u.role.name === 'Customer', 'info': u.role.name === 'User', 'warning': u.role.name === 'Admin'}" ng-repeat="u in users| orderBy : ['role.id', '-id'] | filter:searchText">
           <td>{{ u.email}}</td>
@@ -31,6 +32,7 @@
           <td>{{ u.lastName}}</td>
           <td>{{ u.phone}}</td>
           <td>{{ u.role.name}}</td>
+          <td><a href="" ng-click="editUser(u)"><i class="fa fa-pencil"></i></a>></td>
         </tr>
       </table>
     </div>
