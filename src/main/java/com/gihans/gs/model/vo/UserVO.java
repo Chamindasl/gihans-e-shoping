@@ -29,6 +29,7 @@ public class UserVO {
     }
 
     public UserVO(final User user) {
+        this.id = user.getId();
         this.email = user.getEmail();
         this.displayName = user.getDisplayName();
         this.firstName = user.getFirstName();

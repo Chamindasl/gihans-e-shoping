@@ -7,9 +7,9 @@
           <span class="input-group-btn">
             <button class="btn btn-default" type="button">Go!</button>
           </span>
-        </div><!-- /input-group -->
-      </div><!-- /.col-lg-6 -->
-    </div><!-- /.row -->
+        </div>
+      </div>
+    </div>
   </div>
   <div class="container top5" >
 
@@ -24,7 +24,7 @@
         <th>Phone</th>
         <th>Role</th>
         </thead>
-        <tr ng-class="{'success': u.role.name === 'Customer', 'info': u.role.name === 'User', 'warning': u.role.name === 'Admin'}" ng-repeat="u in users| orderBy : 'role.id' | filter:searchText">
+        <tr ng-class="{'success': u.role.name === 'Customer', 'info': u.role.name === 'User', 'warning': u.role.name === 'Admin'}" ng-repeat="u in users| orderBy : ['role.id', '-id'] | filter:searchText">
           <td>{{ u.email}}</td>
           <td>{{ u.displayName}}</td>
           <td>{{ u.firstName}}</td>
