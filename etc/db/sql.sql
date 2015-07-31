@@ -16,6 +16,31 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`gs` /*!40100 DEFAULT CHARACTER SET utf8
 
 USE `gs`;
 
+/*Table structure for table `address` */
+
+DROP TABLE IF EXISTS `address`;
+
+CREATE TABLE `address` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(200) DEFAULT NULL,
+  `contact_person` varchar(200) DEFAULT NULL,
+  `address_1` varchar(200) DEFAULT NULL,
+  `address_2` varchar(200) DEFAULT NULL,
+  `district` int(11) DEFAULT NULL,
+  `city` int(11) DEFAULT NULL,
+  `company_address` tinyint(1) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `district` (`district`),
+  KEY `city` (`city`),
+  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`district`) REFERENCES `district` (`id`),
+  CONSTRAINT `address_ibfk_2` FOREIGN KEY (`city`) REFERENCES `city` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
+/*Data for the table `address` */
+
+insert  into `address`(`id`,`email`,`contact_person`,`address_1`,`address_2`,`district`,`city`,`company_address`,`phone`) values (1,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',NULL,NULL,1,'+372247051'),(2,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',NULL,NULL,1,'+372247051'),(3,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',NULL,NULL,1,'+372247051'),(4,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',NULL,NULL,1,'+372247051'),(5,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',NULL,NULL,1,'+372247051'),(6,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',NULL,NULL,1,'+372247051'),(7,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',NULL,NULL,1,'+372247051'),(8,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',NULL,NULL,1,'+372247051'),(9,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',NULL,NULL,1,'+372247051'),(10,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',NULL,NULL,1,'+372247051'),(11,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',NULL,NULL,1,'+372247051'),(12,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',NULL,NULL,1,'+372247051'),(13,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',1,1,1,'+372247051'),(14,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',1,1,1,'+372247051'),(15,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',1,1,1,'+372247051'),(16,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',1,1,1,'+372247051'),(17,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',1,1,1,'+372247051'),(18,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',1,1,1,'+372247051'),(19,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',1,1,1,'+372247051'),(20,'chaminda.sl@gmail.com','Mahinda Amarasinghe','34, Karangamuwa','Katupotha',1,1,1,'+372247051');
+
 /*Table structure for table `brand` */
 
 DROP TABLE IF EXISTS `brand`;
@@ -44,6 +69,40 @@ CREATE TABLE `category` (
 /*Data for the table `category` */
 
 insert  into `category`(`id`,`name`,`parent`) values (1,'Women',NULL),(2,'Men',NULL),(3,'Nightware',1),(4,'Children',NULL),(5,'Toy',4),(6,'Shirts',2),(7,'T-Shirts',4),(8,'a',1),(9,'a',NULL),(10,'b',9),(11,'c',9);
+
+/*Table structure for table `city` */
+
+DROP TABLE IF EXISTS `city`;
+
+CREATE TABLE `city` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `district` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `district` (`district`),
+  CONSTRAINT `city_ibfk_1` FOREIGN KEY (`district`) REFERENCES `district` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `city` */
+
+insert  into `city`(`id`,`name`,`district`) values (1,'Colombo 1',1),(2,'Colombo 2',1),(3,'Katupotha',3);
+
+/*Table structure for table `district` */
+
+DROP TABLE IF EXISTS `district`;
+
+CREATE TABLE `district` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `province` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `province` (`province`),
+  CONSTRAINT `district_ibfk_1` FOREIGN KEY (`province`) REFERENCES `province` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+/*Data for the table `district` */
+
+insert  into `district`(`id`,`name`,`province`) values (1,'Colombo',1),(2,'Kaluthara',1),(3,'Kurunegala',2),(4,'Puthlam',2);
 
 /*Table structure for table `item` */
 
@@ -89,6 +148,20 @@ CREATE TABLE `item_imgs` (
 
 /*Data for the table `item_imgs` */
 
+/*Table structure for table `province` */
+
+DROP TABLE IF EXISTS `province`;
+
+CREATE TABLE `province` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `province` */
+
+insert  into `province`(`id`,`name`) values (1,'Western'),(2,'North Western');
+
 /*Table structure for table `related_item` */
 
 DROP TABLE IF EXISTS `related_item`;
@@ -105,6 +178,48 @@ CREATE TABLE `related_item` (
 /*Data for the table `related_item` */
 
 insert  into `related_item`(`item`,`related_item`) values (35,34),(35,33),(35,32),(35,31);
+
+/*Table structure for table `role` */
+
+DROP TABLE IF EXISTS `role`;
+
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `role` */
+
+insert  into `role`(`id`,`name`) values (1,'Admin'),(2,'User'),(3,'Customer');
+
+/*Table structure for table `user` */
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(200) DEFAULT NULL,
+  `display_name` varchar(200) NOT NULL,
+  `first_name` varchar(200) DEFAULT NULL,
+  `last_name` varchar(200) DEFAULT NULL,
+  `password` varchar(200) DEFAULT NULL,
+  `billing_address` bigint(20) DEFAULT NULL,
+  `shipping_address` bigint(20) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `role` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `billing_address` (`billing_address`),
+  KEY `shipping_address` (`shipping_address`),
+  KEY `role` (`role`),
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`billing_address`) REFERENCES `address` (`id`),
+  CONSTRAINT `user_ibfk_2` FOREIGN KEY (`shipping_address`) REFERENCES `address` (`id`),
+  CONSTRAINT `user_ibfk_3` FOREIGN KEY (`role`) REFERENCES `role` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+/*Data for the table `user` */
+
+insert  into `user`(`id`,`email`,`display_name`,`first_name`,`last_name`,`password`,`billing_address`,`shipping_address`,`phone`,`role`) values (3,'chaminda.sl@gmail.com','Chaminda','Chaminda','Amarasinghe','King1!',1,2,'+94718602815',3),(7,'A','AA','Chaminda1','Amarasinghe','King1!',9,10,'+94718602815',3),(8,'B','BB','Chaminda2','Amarasinghe','King1!',11,12,'+94718602815',1),(9,'C','CC','Chaminda3','Amarasinghe','King1!',13,14,'+94718602815',2),(10,'D','DD','Chaminda4','Amarasinghe','King1!',15,16,'+94718602815',2),(11,'chaminda.sl@gmail.com','Chaminda','Chaminda','Amarasinghe','King1!',17,18,'+94718602815',1),(12,'su@gmail.com','suminda','Suminda','Amarasinghe','King1!',19,20,'+94718602815',2);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
