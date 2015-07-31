@@ -1,9 +1,9 @@
-app.service('voService', function (categoryService) {
+app.service('voService', function (dataService) {
   var indexVO = {};
 
   this.getIndexVO = function () {
-    indexVO.categories = categoryService.getAllCategories();
-//    console.log("-" + categoryService.getAllCategories());
+    indexVO.categories = dataService.getAllCategories();
+//    console.log("-" + dataService.getAllCategories());
     return indexVO;
   };
 

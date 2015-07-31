@@ -1,6 +1,6 @@
 'use strict';
-app.controller("UserCtrl", ['$scope', '$rootScope', '$http', 'voService', 'provinceService',
-  function ($scope, $rootScope, $http, voService, provinceService) {
+app.controller("UserCtrl", ['$scope', '$rootScope', '$http', '$location', 'voService', 'dataService',
+  function ($scope, $rootScope, $http, $location, voService, dataService) {
 
     $scope.sameAsBilling = function () {
       if ($scope.user.shipingSameAsBilling) {
@@ -8,19 +8,32 @@ app.controller("UserCtrl", ['$scope', '$rootScope', '$http', 'voService', 'provi
       }
     };
 
-    $scope.loadProvinces = function () {
+    $scope.loadRefData = function () {
 
-      provinceService.getAllProvinces().then(function (data) {
+      dataService.getAllProvinces().then(function (data) {
         $scope.provinces = data;
       });
+
+      dataService.getAllRoles().then(function (data) {
+        $scope.roles = data;
+      });
+
     };
 
+    $scope.loadAllUsers = function () {
+
+      $http.get('http://localhost:8080/gihans-e-shoping/rest/user/users').then(function (result) {
+        $scope.users = result.data;
+      });
+
+    };
 
     $scope.init = function () {
       $scope.title = "Add User";
       $scope.step = 1;
       $scope.provinces = [];
-      $scope.loadProvinces();
+      $scope.loadRefData();
+      $scope.loadAllUsers();
 
       $scope.user = {
         email: "chaminda.sl@gmail.com",
@@ -84,6 +97,7 @@ app.controller("UserCtrl", ['$scope', '$rootScope', '$http', 'voService', 'provi
       if ($scope.userFormS1.$valid && $scope.userFormS3.$valid && $scope.userFormS3.$valid) {
         $http.post('http://localhost:8080/gihans-e-shoping/rest/user', $scope.user)
                 .success(function (data, status, header, config) {
+                  $location.path("user-list")
                 })
                 .error(function (data, status, header, config) {
                   // error handler

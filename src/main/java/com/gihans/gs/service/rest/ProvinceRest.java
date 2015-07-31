@@ -5,18 +5,14 @@
  */
 package com.gihans.gs.service.rest;
 
-import com.gihans.gs.model.Category;
 import com.gihans.gs.model.Province;
-import com.gihans.gs.model.vo.CategoryVO;
 import com.gihans.gs.model.vo.ProvinceVO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 

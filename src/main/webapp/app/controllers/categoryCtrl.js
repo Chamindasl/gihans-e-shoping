@@ -1,10 +1,10 @@
 'use strict';
-app.controller("CategoryCtrl", ['$scope', '$rootScope', '$http', 'categoryService',
-  function ($scope, $rootScope, $http, categoryService) {
+app.controller("CategoryCtrl", ['$scope', '$rootScope', '$http', 'dataService',
+  function ($scope, $rootScope, $http, dataService) {
 
     $scope.loadCagetories = function () {
 
-      categoryService.getAllCategories().then(function (data) {
+      dataService.getAllCategories().then(function (data) {
         $scope.categories = data;
         if ($scope.selectedCategory) {
           for (var i = 0; i < $scope.categories.length; i++) {

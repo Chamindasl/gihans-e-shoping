@@ -1,6 +1,6 @@
 'use strict';
-app.controller("IndexCtrl", ['$scope', '$rootScope', '$http', 'voService', 'categoryService',
-  function ($scope, $rootScope, $http, voService, categoryService) {
+app.controller("IndexCtrl", ['$scope', '$rootScope', '$http', 'voService', 'dataService',
+  function ($scope, $rootScope, $http, voService, dataService) {
 
     function chunk (arr, size) {
       var newArr = [];
@@ -34,7 +34,7 @@ app.controller("IndexCtrl", ['$scope', '$rootScope', '$http', 'voService', 'cate
     };
 
     $scope.loadCagetories = function () {
-      categoryService.getAllCategories().then(function (data) {
+      dataService.getAllCategories().then(function (data) {
         $scope.indexVO.categories = data;
       });
     };

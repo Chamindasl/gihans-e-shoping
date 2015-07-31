@@ -30,6 +30,10 @@ app.config(['$routeProvider',
                     templateUrl: 'views/user.html',
                     controller: 'UserCtrl'
                 }).
+                when('/user-list', {
+                    templateUrl: 'views/user-list.html',
+                    controller: 'UserCtrl'
+                }).
                 otherwise({
                     redirectTo: '/index'
                 });

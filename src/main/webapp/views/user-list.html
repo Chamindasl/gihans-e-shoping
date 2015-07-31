@@ -1,0 +1,38 @@
+<section id="cart_items">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 pull-right">
+        <div class="input-group">
+          <input ng-model="searchText" type="text" class="form-control" placeholder="Search for User...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+  </div>
+  <div class="container top5" >
+
+    <div class="table-responsive cart_info">
+      <table class="table table-condensed">
+
+        <thead ng-class="active" >
+        <th class="">Email</th>
+        <th>Display Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone</th>
+        <th>Role</th>
+        </thead>
+        <tr ng-class="{'success': u.role.name === 'Customer', 'info': u.role.name === 'User', 'warning': u.role.name === 'Admin'}" ng-repeat="u in users| orderBy : 'role.id' | filter:searchText">
+          <td>{{ u.email}}</td>
+          <td>{{ u.displayName}}</td>
+          <td>{{ u.firstName}}</td>
+          <td>{{ u.lastName}}</td>
+          <td>{{ u.phone}}</td>
+          <td>{{ u.role.name}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section><!--/#do_action-->

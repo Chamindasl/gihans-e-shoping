@@ -1,6 +1,6 @@
 'use strict';
-app.controller("ItemCtrl", ['$scope', '$rootScope', '$http', 'categoryService', '$routeParams',
-  function ($scope, $rootScope, $http, categoryService, $routeParams) {
+app.controller("ItemCtrl", ['$scope', '$rootScope', '$http', 'dataService', '$routeParams',
+  function ($scope, $rootScope, $http, dataService, $routeParams) {
 
     $scope.loadItem = function (item) {
       $http.get('http://localhost:8080/gihans-e-shoping/rest/item/get?id=' + item).
@@ -16,7 +16,7 @@ app.controller("ItemCtrl", ['$scope', '$rootScope', '$http', 'categoryService', 
       if ($routeParams.item) {
         $scope.loadItem($routeParams.item);
       } else {
-        categoryService.getAllCategories().then(function (data) {
+        dataService.getAllCategories().then(function (data) {
           $scope.categories = data;
         });
       }

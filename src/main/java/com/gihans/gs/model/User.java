@@ -5,7 +5,6 @@
  */
 package com.gihans.gs.model;
 
-import com.gihans.gs.model.vo.UserVO;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -31,7 +30,6 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
-    @NamedQuery(name = "User.findByType", query = "SELECT u FROM User u WHERE u.type = :type"),
     @NamedQuery(name = "User.findByDisplayName", query = "SELECT u FROM User u WHERE u.displayName = :displayName"),
     @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
     @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
@@ -48,8 +46,6 @@ public class User implements Serializable {
     @Size(max = 200)
     @Column(name = "email")
     private String email;
-    @Column(name = "type")
-    private Character type;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
@@ -74,6 +70,9 @@ public class User implements Serializable {
     @JoinColumn(name = "billing_address", referencedColumnName = "id")
     @ManyToOne
     private Address billingAddress;
+    @JoinColumn(name = "role", referencedColumnName = "id")
+    @ManyToOne
+    private Role role;
 
     public User() {
     }
@@ -85,19 +84,6 @@ public class User implements Serializable {
     public User(Long id, String displayName) {
         this.id = id;
         this.displayName = displayName;
-    }
-
-    public User(UserVO userVo) {
-        this.id = userVo.id;
-        this.displayName = userVo.displayName;
-        this.email = userVo.email;
-        this.firstName = userVo.firstName;
-        this.lastName = userVo.lastName;
-        this.phone = userVo.phone;
-        this.shippingAddress = userVo.shippingAddress.toAddress();
-        this.billingAddress = userVo.billingAddress.toAddress();
-        this.password = userVo.password;
-        this.type = userVo.type;
     }
 
     public Long getId() {
@@ -114,14 +100,6 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Character getType() {
-        return type;
-    }
-
-    public void setType(Character type) {
-        this.type = type;
     }
 
     public String getDisplayName() {
@@ -178,6 +156,14 @@ public class User implements Serializable {
 
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
