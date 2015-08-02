@@ -1,0 +1,11 @@
+<div class="col-sm-12" ng-controller="MenuCtrl">
+  <ul class="nav nav-tabs">
+    <li class="dropdown" ng-class="{active : m.active}" ng-repeat="m in menus">
+      <a ng-class="{active : m.active}" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{m.name}}<span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li ng-class="{active : ms.active, inactive : !ms.active}" ng-repeat="ms in m.subs"><a ng-class="{active : ms.active, inactive : !ms.active}" href="" ng-click="go(ms, m);">{{ms.name}}</a></li>
+        <li role="separator" class="divider"></li>
+      </ul>
+    </li>
+  </ul>
+</div>

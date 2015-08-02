@@ -1027,7 +1027,7 @@ h2.title {
 	color:#fff;
 }
 
-.nav-tabs  li.active  a, .nav-tabs  li.active  a:hover, .nav-tabs  li.active  a:focus {
+.nav-tabs  li.active  a.active, .nav-tabs  li.active  a:hover, .nav-tabs  li.active  a:focus {
   -moz-border-bottom-colors: none;
   -moz-border-left-colors: none;
   -moz-border-right-colors: none;
@@ -2533,9 +2533,15 @@ a.list-group-item.ge, a.list-group-item.ge:hover, a.list-group-item.ge:focus {
   color: #fff;
 }
 
-.top5 { margin-top:20px; }
+.top20 { margin-top: 20px; }
+.bottom20 { margin-bottom: 20px; }
 
 thead th {
     background-color: #fdb45e;
     color: white;
+}
+
+.inactive {
+  background-color: #fff;
+  color: #428bca;
 }
