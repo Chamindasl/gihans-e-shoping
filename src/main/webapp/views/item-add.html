@@ -7,44 +7,45 @@
     <div class="row">  	
       <div class="col-sm-12">
         <div class="contact-form">
-          <h2 class="title text-center">Add New Item</h2>
+          <h2 class="title text-center">{{title}}</h2>
           <div class="status alert alert-success" style="display: none">Something</div>
           <form ng-submit="submit()" class="form-horizontal" role="form" method="POST" action="/gihans-e-shoping/rest/item/create" enctype="multipart/form-data">
             <div class="form-group">
               <label for="name" class="col-sm-2 control-label">Name</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required value="{{item.name}}">
+                <input type="hidden" id="id" name="id" value="{{item.id}}">
               </div>
             </div>
             <div class="form-group">
               <label for="price" class="col-sm-2 control-label">Price</label>
               <div class="col-sm-10">
-                <input name="price" type="number" class="form-control" id="price" placeholder="Price" min="0" required>
+                <input name="price" type="number" class="form-control" id="price" placeholder="Price" min="0" required value="{{item.price}}">
               </div>
             </div>
             <div class="form-group">
               <label for="stock" class="col-sm-2 control-label">Stock</label>
               <div class="col-sm-10">
-                <input name= "stock" type="number" class="form-control" id="stock" placeholder="Price" min="0" step="1" required>
+                <input name= "stock" type="number" class="form-control" id="stock" placeholder="Stock" min="0" step="1" required value="{{item.stock}}">
               </div>
             </div>
             <div class="form-group">
               <label for="stock" class="col-sm-2 control-label">Available From</label>
               <div class="col-sm-10">
-                <input type="date" class="form-control" id="date" name="startFrom">
+                <input type="date" class="form-control" id="date" name="startFrom" value="{{item.startFrom}}">
               </div>
             </div>
             <div class="form-group">
               <label for="category" class="col-sm-2 control-label">Category</label>
               <div class="col-sm-10">
-                <select id="category" class="form-control" ng-model="selectedCategory" required ng-options="c.name for c in categories"></select>
+                <select id="category" class="form-control" ng-model="selectedCategory" required ng-options="c.name for c in categories track by c.id"></select>
               </div>
               <input type="hidden" name="category" value="{{selectedCategory.id}}">
             </div>
             <div class="form-group">
               <label for="subCategory" class="col-sm-2 control-label">Sub Category</label>
               <div class="col-sm-10">
-                <select id="subCategory" ng-model="selectedSubCategory"  class="form-control" required ng-options="c.name for c in selectedCategory.subCategories">
+                <select id="subCategory" ng-model="selectedSubCategory"  class="form-control" ng-options="c.name for c in selectedCategory.subCategories track by c.id">
                   <option value="">--- Select (Optional) ---</option>
                 </select>
                 <input type="hidden" name="subCategory" value="{{selectedSubCategory.id}}">
@@ -53,22 +54,22 @@
             <div class="form-group">
               <label for="category" class="col-sm-2 control-label">Brand</label>
               <div class="col-sm-10">
-                <select id="category" class="form-control" ng-model="selectedBrand" required ng-options="c.name for c in brands"></select>
+                <select id="category" class="form-control" ng-model="selectedBrand" required ng-options="c.name for c in brands track by c.id"></select>
               </div>
               <input type="hidden" name="brand" value="{{selectedBrand.id}}">
             </div>
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <label class="checkbox-inline">
-                  <input name="fresh" type="checkbox" id="inlineCheckbox1" value="true">
+                  <input name="fresh" type="checkbox" id="inlineCheckbox1" ng-model="item.fresh" >
                   New
                 </label>
                 <label class="checkbox-inline">
-                  <input name="featured" type="checkbox" id="inlineCheckbox2" value="true">
+                  <input name="featured" type="checkbox" id="inlineCheckbox2" ng-model="item.featured">
                   Featured
                 </label>
                 <label class="checkbox-inline">
-                  <input name="onSale" type="checkbox" id="inlineCheckbox3" value="true">
+                  <input name="onSale" type="checkbox" id="inlineCheckbox3" ng-model="item.sale">
                   On Sale
                 </label>
               </div>

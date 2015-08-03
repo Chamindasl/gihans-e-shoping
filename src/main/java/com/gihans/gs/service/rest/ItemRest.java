@@ -48,8 +48,14 @@ public class ItemRest {
     @Path("create")
     @Consumes("multipart/form-data")
     public Response addItem(final MultipartFormDataInput input, @Context Response response) throws URISyntaxException {
-        final Item item = new Item();
+        final Item item;
         try {
+            final Long id = readLong(input, "id");
+            if (id == 0) {
+                item = new Item();
+            } else {
+                item = em.find(Item.class, id);
+            }
             item.setName(readString(input, "name"));
             item.setPrice(readDouble(input, "price"));
             item.setFresh(readBoolean(input, "fresh"));
@@ -70,8 +76,11 @@ public class ItemRest {
             if (!StringUtils.isEmpty(brand)) {
                 item.setBrand(em.find(Brand.class, Integer.valueOf(brand)));
             }
-            em.persist(item);
-            em.flush();
+            if (null == item.getId()) {
+                em.persist(item);
+                em.flush();
+            }
+
             item.setMainImage(saveImageAndGetPath(item.getId(), input, "mainImage"));
             item.setCartImage(saveImageAndGetPath(item.getId(), input, "cartImage"));
             item.setIndexImage(saveImageAndGetPath(item.getId(), input, "indexImage"));
@@ -146,6 +155,14 @@ public class ItemRest {
             return Integer.valueOf(input.getFormDataMap().get(param).get(0).getBodyAsString());
         } catch (IOException | NumberFormatException ex) {
             return 0;
+        }
+    }
+
+    private Long readLong(final MultipartFormDataInput input, final String param) {
+        try {
+            return Long.valueOf(input.getFormDataMap().get(param).get(0).getBodyAsString());
+        } catch (NullPointerException | IOException | NumberFormatException ex) {
+            return 0l;
         }
     }
 

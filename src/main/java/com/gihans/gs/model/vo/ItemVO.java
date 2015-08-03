@@ -7,6 +7,7 @@ package com.gihans.gs.model.vo;
 
 import com.gihans.gs.model.Category;
 import com.gihans.gs.model.Item;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -27,6 +28,8 @@ public class ItemVO {
     public int noOfItems;
     public boolean inCart;
     public boolean featured;
+    public int stock;
+    public String startFrom;
     public String featuredTxt;
     public CategoryVO categoryVO;
     public BrandVO brandVO;
@@ -48,6 +51,7 @@ public class ItemVO {
         this.mainImage = item.getMainImage();
         this.noOfItems = item.getStock();
         this.price = item.getPrice();
+        this.stock = item.getStock();
         this.featuredTxt = this.featured ? "Featured" : "";
         this.freshTxt = this.fresh ? "New" : "";
         this.saleTxt = this.sale ? "Sale" : "";
@@ -58,6 +62,10 @@ public class ItemVO {
         }
         if (null != item.getBrand()) {
             this.brandVO = new BrandVO(item.getBrand());
+        }
+        if (null != item.getStartFrom()) {
+            final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            this.startFrom = sdf.format(item.getStartFrom());
         }
     }
 
