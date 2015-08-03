@@ -11,7 +11,7 @@ app.service('menuService', function ($http, loginService) {
           active: true
         }, {
           name: 'User',
-          url: "",
+          url: "admin-dashboard",
           active: false
         }]
     }, {
@@ -57,6 +57,10 @@ app.service('menuService', function ($http, loginService) {
           name: 'List Users',
           url: "user-list",
           active: false
+        }, {
+          name: 'Logout',
+          url: "admin",
+          active: false
         }]
     }
   ];
@@ -68,7 +72,7 @@ app.service('menuService', function ($http, loginService) {
       active: true,
       subs: [{
           name: 'User',
-          url: "",
+          url: "admin-dashboard",
           active: false
         }]
     }, {
@@ -89,8 +93,8 @@ app.service('menuService', function ($http, loginService) {
       url: "",
       active: false,
       subs: [{
-          name: 'List Users',
-          url: "user-list",
+          name: 'Logout',
+          url: "admin",
           active: false
         }]
     }
