@@ -72,7 +72,7 @@ public class ItemRest {
             java.net.URI location = new java.net.URI("../#/item/set-recommended?item=" + item.getId());
             return Response.seeOther(location).build();
 
-        } catch (final Exception ex) {
+        } catch (final NumberFormatException | URISyntaxException ex) {
             // need to handle exception properly
             return Response.serverError().build();
         }
@@ -107,17 +107,17 @@ public class ItemRest {
         if (!file.exists()) {
             file.createNewFile();
         }
-        final FileOutputStream fop = new FileOutputStream(file);
-        fop.write(content);
-        fop.flush();
-        fop.close();
+        try (FileOutputStream fop = new FileOutputStream(file)) {
+            fop.write(content);
+            fop.flush();
+        }
 
     }
 
     private Double readDouble(final MultipartFormDataInput input, final String param) {
         try {
             return Double.valueOf(input.getFormDataMap().get(param).get(0).getBodyAsString());
-        } catch (Exception ex) {
+        } catch (IOException | NumberFormatException ex) {
             return 0.0d;
         }
     }
@@ -125,7 +125,7 @@ public class ItemRest {
     private Integer readInteger(final MultipartFormDataInput input, final String param) {
         try {
             return Integer.valueOf(input.getFormDataMap().get(param).get(0).getBodyAsString());
-        } catch (Exception ex) {
+        } catch (IOException | NumberFormatException ex) {
             return 0;
         }
     }

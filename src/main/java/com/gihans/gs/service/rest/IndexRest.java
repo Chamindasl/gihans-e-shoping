@@ -5,6 +5,7 @@
  */
 package com.gihans.gs.service.rest;
 
+import com.gihans.gs.model.Brand;
 import com.gihans.gs.model.Category;
 import com.gihans.gs.model.vo.IndexVO;
 import com.gihans.gs.model.vo.ItemVO;
@@ -83,6 +84,10 @@ public class IndexRest {
         }
         if (null != indexVO.selectedCategory) {
             final List<Item> relatedItems = em.find(Category.class, Integer.valueOf("" + indexVO.selectedCategory.id)).getItemList();
+            relatedItemSet.addAll(relatedItems);
+        }
+        if (null != indexVO.selectedBrand) {
+            final List<Item> relatedItems = em.find(Brand.class, Integer.valueOf("" + indexVO.selectedBrand.id)).getItemList();
             relatedItemSet.addAll(relatedItems);
         }
         for (final Item i : relatedItemSet) {
