@@ -28,6 +28,24 @@ app.service('menuService', function ($http, loginService) {
           active: false
         }]
     }, {
+      name: 'Category',
+      url: "",
+      active: false,
+      subs: [{
+          name: 'View Categories',
+          url: "category",
+          active: false
+        }]
+    }, {
+      name: 'Brand',
+      url: "",
+      active: false,
+      subs: [{
+          name: 'View Brands',
+          url: "brand",
+          active: false
+        }]
+    }, {
       name: 'User',
       url: "",
       active: false,
@@ -100,7 +118,6 @@ app.service('menuService', function ($http, loginService) {
       } else {
         return null;
       }
-
     }
   };
 
@@ -113,6 +130,5 @@ app.service('menuService', function ($http, loginService) {
     } else {
     }
   };
-
 
 });

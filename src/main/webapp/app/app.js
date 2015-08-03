@@ -26,6 +26,10 @@ app.config(['$routeProvider',
                     templateUrl: 'views/category.html',
                     controller: 'CategoryCtrl'
                 }).
+                when('/brand', {
+                    templateUrl: 'views/brand.html',
+                    controller: 'BrandCtrl'
+                }).
                 when('/user', {
                     templateUrl: 'views/user.html',
                     controller: 'UserCtrl'

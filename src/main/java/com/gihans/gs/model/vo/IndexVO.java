@@ -19,5 +19,7 @@ public class IndexVO {
     public List<ItemVO> recommendedItems = new ArrayList<>();
     public List<ItemVO> cartItems = new ArrayList<>();
     public List<CategoryVO> categories = new ArrayList<>();
+    public List<BrandVO> brands = new ArrayList<>();
     public ItemVO addedItemVO;
+    public BrandVO selectedBrand;
 }

@@ -38,6 +38,9 @@ public class IndexRest {
     @EJB
     private CategoryRest categoryRest;
 
+    @EJB
+    private BrandRest brandRest;
+
     @POST
     @Consumes({"application/json"})
     @Produces({"application/json"})
@@ -61,6 +64,7 @@ public class IndexRest {
     @Path("loadIndexVO")
     public IndexVO loadIndexVO(final IndexVO indexVO) {
         loadCategories(indexVO);
+        loadBrands(indexVO);
         loadFeaturedItems(indexVO);
         return indexVO;
     }
@@ -105,6 +109,10 @@ public class IndexRest {
         }
         indexVO.recommendedItems = relatedItems;
         indexVO.featuredItems = itemVOs;
+    }
+
+    private void loadBrands(final IndexVO indexVO) {
+        indexVO.brands = brandRest.findAll();
     }
 
 }

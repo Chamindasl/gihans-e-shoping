@@ -15,7 +15,6 @@ app.controller("IndexCtrl", ['$scope', '$rootScope', '$http', 'voService', 'data
               .success(function (data, status, header, config) {
                 $scope.indexVO = data;
                 $scope.chunked = chunk($scope.indexVO.recommendedItems, 3)
-                console.info($scope.indexVO);
               })
               .error(function (data, status, header, config) {
                 // error handler
@@ -59,6 +58,15 @@ app.controller("IndexCtrl", ['$scope', '$rootScope', '$http', 'voService', 'data
       if (parent) {
         parent.selected = true;
       }
+      $scope.recommendedItems();
+    };
+
+    $scope.selectBrand = function (brand) {
+      for (var i = 0; i < $scope.indexVO.brands.length; i++) {
+        delete $scope.indexVO.brands[i].selected;
+      }
+      brand.selected = true;
+      $scope.indexVO.selectedBrand = brand;
       $scope.recommendedItems();
     };
 
