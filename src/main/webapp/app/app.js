@@ -1,6 +1,6 @@
 'use strict';
 var app = angular.module('app', [
-    'ngRoute'
+    'ngRoute', 'angularUtils.directives.dirPagination'
 ]);
 
 app.config(['$routeProvider',
@@ -14,8 +14,12 @@ app.config(['$routeProvider',
                     templateUrl: 'views/cart.html',
                     controller: 'CartCtrl'
                 }).
-                when('/add-item', {
-                    templateUrl: 'views/add-item.html',
+                when('/item/add', {
+                    templateUrl: 'views/item-add.html',
+                    controller: 'ItemCtrl'
+                }).
+                when('/item/list', {
+                    templateUrl: 'views/item-list.html',
                     controller: 'ItemCtrl'
                 }).
                 when('/item/set-recommended', {
@@ -30,11 +34,11 @@ app.config(['$routeProvider',
                     templateUrl: 'views/brand.html',
                     controller: 'BrandCtrl'
                 }).
-                when('/user', {
+                when('/user/add', {
                     templateUrl: 'views/user.html',
                     controller: 'UserCtrl'
                 }).
-                when('/user-list', {
+                when('/user/list', {
                     templateUrl: 'views/user-list.html',
                     controller: 'UserCtrl'
                 }).

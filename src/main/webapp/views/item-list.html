@@ -1,0 +1,52 @@
+<section id="cart_items">
+  <div class="container">
+
+    <div class="row bottom20">
+      <div ng-include src="'views/parts/menu.html'"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5 pull-right">
+        <div class="input-group">
+          <input ng-model="searchText" type="text" class="form-control" placeholder="Search for Item...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container top20" >
+
+    <div class="table-responsive cart_info">
+      <table class="table table-condensed">
+        <thead ng-class="active" >
+        <th class="">Image</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>New</th>
+        <th>On Sale</th>
+        <th>Featured</th>
+        <th>Related Items</th>
+        <th>Category</th>
+        <th>Brand</th>
+        </thead>
+        <tr  class="success" dir-paginate="i in items| orderBy : ['brandVO.name', 'categoryVO.name', 'id'] | filter:searchText | itemsPerPage: 15">
+          <td><img src="{{i.indexImage}}" alt="No Img"></td>
+          <td>{{ i.id}}</td>
+          <td>{{ i.name}}</td>
+          <td class="text-right">{{ i.price}}</td>
+          <td>{{i.freshTxt}}</td>
+          <td>{{i.saleTxt}}</td>
+          <td>{{i.featuredTxt}}</td>
+          <td></td>
+          <td>{{i.categoryVO.name}}</td>
+          <td>{{i.brandVO.name}}</td>
+          <td><a href="" ng-click="editUser(u)"><i class="fa fa-pencil"></i></a>></td>
+        </tr>
+      </table>
+      <dir-pagination-controls></dir-pagination-controls>
+    </div>
+  </div>
+</section><!--/#do_action-->

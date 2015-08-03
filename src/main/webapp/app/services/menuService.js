@@ -3,63 +3,63 @@ app.service('menuService', function ($http, loginService) {
   var adminMenus = [
     {
       name: 'Dashboard',
-      url: "",
+      url: '',
       active: true,
       subs: [{
           name: 'Admin',
-          url: "admin-dashboard",
+          url: 'admin-dashboard',
           active: true
         }, {
           name: 'User',
-          url: "admin-dashboard",
+          url: 'admin-dashboard',
           active: false
         }]
     }, {
       name: 'Item',
-      url: "",
+      url: '',
       active: false,
       subs: [{
           name: 'Add Item',
-          url: "add-item",
+          url: 'item/add',
           active: false
         }, {
           name: 'List Items',
-          url: "index",
+          url: 'item/list',
           active: false
         }]
     }, {
       name: 'Category',
-      url: "",
+      url: '',
       active: false,
       subs: [{
           name: 'View Categories',
-          url: "category",
+          url: 'category',
           active: false
         }]
     }, {
       name: 'Brand',
-      url: "",
+      url: '',
       active: false,
       subs: [{
           name: 'View Brands',
-          url: "brand",
+          url: 'brand',
           active: false
         }]
     }, {
       name: 'User',
-      url: "",
+      url: '',
       active: false,
       subs: [{
           name: 'Add User',
-          url: "user",
+          url: 'user/add',
           active: false
         }, {
           name: 'List Users',
-          url: "user-list",
+          url: 'user/list',
           active: false
         }, {
           name: 'Logout',
-          url: "admin",
+          url: 'admin',
           active: false
         }]
     }
@@ -68,39 +68,40 @@ app.service('menuService', function ($http, loginService) {
   var userMenus = [
     {
       name: 'Dashboard',
-      url: "",
+      url: '',
       active: true,
       subs: [{
           name: 'User',
-          url: "admin-dashboard",
+          url: 'admin-dashboard',
           active: false
         }]
     }, {
       name: 'Item',
-      url: "",
+      url: '',
       active: false,
       subs: [{
           name: 'Add Item',
-          url: "add-item",
+          url: 'item/add',
           active: false
         }, {
           name: 'List Items',
-          url: "index",
+          url: 'item/list',
           active: false
         }]
     }, {
       name: 'User',
-      url: "",
+      url: '',
       active: false,
       subs: [{
           name: 'Logout',
-          url: "admin",
+          url: 'admin',
           active: false
         }]
     }
   ];
 
   this.getMenus = function () {
+    return adminMenus;
     var user = loginService.getLoggedInUser();
     if (!user) {
       loginService.getLoggedInUserFromSession().then(function (data) {

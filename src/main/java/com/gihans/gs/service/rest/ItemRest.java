@@ -5,6 +5,7 @@
  */
 package com.gihans.gs.service.rest;
 
+import com.gihans.gs.model.Brand;
 import com.gihans.gs.model.Category;
 import com.gihans.gs.model.Item;
 import com.gihans.gs.model.vo.ItemVO;
@@ -16,7 +17,9 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -63,6 +66,10 @@ public class ItemRest {
             } else {
                 item.setCategory(em.find(Category.class, Integer.valueOf(cat)));
             }
+            final String brand = readString(input, "brand");
+            if (!StringUtils.isEmpty(brand)) {
+                item.setBrand(em.find(Brand.class, Integer.valueOf(brand)));
+            }
             em.persist(item);
             em.flush();
             item.setMainImage(saveImageAndGetPath(item.getId(), input, "mainImage"));
@@ -76,7 +83,7 @@ public class ItemRest {
             // need to handle exception properly
             return Response.serverError().build();
         }
-        
+
     }
 
     @GET
@@ -86,6 +93,18 @@ public class ItemRest {
         final Item item = em.find(Item.class, id);
         final ItemVO itemVO = new ItemVO(item);
         return itemVO;
+    }
+
+    @GET
+    @Path("list")
+    @Produces("application/json")
+    public List<ItemVO> getItems() {
+        final List<Item> items = em.createQuery("select i from Item i", Item.class).getResultList();
+        final List<ItemVO> result = new ArrayList<>();
+        for (final Item i : items) {
+            result.add(new ItemVO(i));
+        }
+        return result;
     }
 
     private String saveImageAndGetPath(final Long id, final MultipartFormDataInput input, final String img) {

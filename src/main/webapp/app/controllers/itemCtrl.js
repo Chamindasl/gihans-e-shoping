@@ -12,6 +12,16 @@ app.controller("ItemCtrl", ['$scope', '$rootScope', '$http', 'dataService', '$ro
               });
     };
 
+    $scope.loadItems = function (item) {
+      $http.get('http://localhost:8080/gihans-e-shoping/rest/item/list').
+              success(function (data, status, headers, config) {
+                $scope.items = data;
+              }).
+              error(function (data, status, headers, config) {
+                // log error
+              });
+    };
+
     $scope.init = function () {
       if ($routeParams.item) {
         $scope.loadItem($routeParams.item);
@@ -19,6 +29,10 @@ app.controller("ItemCtrl", ['$scope', '$rootScope', '$http', 'dataService', '$ro
         dataService.getAllCategories().then(function (data) {
           $scope.categories = data;
         });
+        dataService.getAllBrands().then(function (data) {
+          $scope.brands = data;
+        });
+        $scope.loadItems();
       }
     };
 

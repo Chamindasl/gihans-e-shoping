@@ -21,10 +21,15 @@ public class ItemVO {
     public String cartImage;
     public boolean fresh;
     public boolean sale;
+    public String freshTxt;
+    public String saleTxt;
     public double price;
     public int noOfItems;
     public boolean inCart;
+    public boolean featured;
+    public String featuredTxt;
     public CategoryVO categoryVO;
+    public BrandVO brandVO;
 
     public ItemVO() {
 
@@ -35,15 +40,24 @@ public class ItemVO {
         this.name = item.getName();
         this.cartImage = item.getCartImage();
         this.categoryVO = new CategoryVO();
+        this.brandVO = new BrandVO();
         this.fresh = item.getFresh();
+        this.sale = item.getOnSale();
+        this.featured = item.getFeatured();
         this.indexImage = item.getIndexImage();
         this.mainImage = item.getMainImage();
         this.noOfItems = item.getStock();
         this.price = item.getPrice();
+        this.featuredTxt = this.featured ? "Featured" : "";
+        this.freshTxt = this.fresh ? "New" : "";
+        this.saleTxt = this.sale ? "Sale" : "";
         final Category category = item.getCategory();
         if (null != category) {
             this.categoryVO.id = category.getId();
             this.categoryVO.name = category.getName();
+        }
+        if (null != item.getBrand()) {
+            this.brandVO = new BrandVO(item.getBrand());
         }
     }
 

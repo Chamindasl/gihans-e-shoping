@@ -97,7 +97,7 @@ app.controller("UserCtrl", ['$scope', '$rootScope', '$http', '$location', 'voSer
     $scope.editUser = function (user) {
       $scope.user = user;
       $scope.step = 1;
-      $location.path("user")
+      $location.path(user/add)
     };
 
     $scope.saveUser = function () {
@@ -105,7 +105,7 @@ app.controller("UserCtrl", ['$scope', '$rootScope', '$http', '$location', 'voSer
       if ($scope.userFormS1.$valid && $scope.userFormS3.$valid && $scope.userFormS3.$valid) {
         $http.post('http://localhost:8080/gihans-e-shoping/rest/user', $scope.user)
                 .success(function (data, status, header, config) {
-                  $location.path("user-list")
+                  $location.path("user/list")
                 })
                 .error(function (data, status, header, config) {
                   // error handler
