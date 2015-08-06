@@ -60,7 +60,11 @@ public class User implements Serializable {
     @Size(max = 200)
     @Column(name = "password")
     private String password;
-    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    @Size(max = 200)
+    @Column(name = "uuid")
+    private String uuid;
+    @Column(name = "active")
+    private Boolean active;
     @Size(max = 50)
     @Column(name = "phone")
     private String phone;
@@ -84,6 +88,22 @@ public class User implements Serializable {
     public User(Long id, String displayName) {
         this.id = id;
         this.displayName = displayName;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Long getId() {

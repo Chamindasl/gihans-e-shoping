@@ -15,10 +15,13 @@ import com.gihans.gs.model.vo.UserVO;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -34,6 +37,12 @@ public class UserRest {
 
     @PersistenceContext(unitName = "gihans_PU")
     private EntityManager em;
+
+    @EJB
+    private MailService mailService;
+
+    @Context
+    private ServletContext context;
 
     @POST
     @Produces("application/json")
@@ -53,6 +62,8 @@ public class UserRest {
             tShip.setDistrict(em.find(District.class, tShip.getDistrict().getId()));
             tBill.setCity(em.find(City.class, tBill.getCity().getId()));
             tShip.setCity(em.find(City.class, tShip.getCity().getId()));
+            user.setActive(false);
+            user.setUuid(UUID.randomUUID().toString());
             //tBill.
             em.persist(user);
             em.persist(tBill);
@@ -62,6 +73,7 @@ public class UserRest {
             user.setShippingAddress(tShip);
             em.merge(user);
             userVo.id = user.getId();
+            mailService.sendMail(user, context.getRealPath("/"));
             return userVo;
         } else {
 
