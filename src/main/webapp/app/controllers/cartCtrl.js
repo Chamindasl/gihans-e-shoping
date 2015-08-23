@@ -1,9 +1,10 @@
 'use strict';
-app.controller("CartCtrl", ['$scope', '$rootScope', '$http', 'voService',
-  function ($scope, $rootScope, $http, voService) {
+app.controller("CartCtrl", ['$scope', '$rootScope', '$http', 'voService', 'loginService', '$location',
+  function ($scope, $rootScope, $http, voService, loginService, $location) {
 
     $scope.init = function () {
       $scope.indexVO = voService.getIndexVO();
+      $scope.loggedInUser = loginService.getLoggedInUser();
     };
 
     $scope.init();
@@ -35,26 +36,17 @@ app.controller("CartCtrl", ['$scope', '$rootScope', '$http', 'voService',
       return total;
     };
 
-    $scope.mymodel = function () {
-      $(function () {
-        $("#dialog").dialog({
-          autoOpen: false,
-          show: {
-            effect: "blind",
-            duration: 1000
-          },
-          hide: {
-            effect: "explode",
-            duration: 1000
-          }
-        });
-
-        $("#opener").click(function () {
-          $("#dialog").dialog("open");
-        });
-      });
+    $scope.saveOrder = function () {
+      if ($scope.loggedInUser) {
+        $http.post('http://localhost:8080/gihans-e-shoping/rest/order/place', $scope.indexVO)
+                .success(function (data, status, header, config) {
+                  window.location = "http://www.payeasy.lk/billpayWeb/Controller"
+                })
+                .error(function (data, status, header, config) {
+                  // error handler
+                });
+      } else {
+        $location.path('customer/login');
+      }
     };
-    
-    $scope.mymodel();
-
   }]);

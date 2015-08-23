@@ -20,8 +20,6 @@ import java.io.File;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
-import javax.ejb.EJBContext;
-import javax.ejb.SessionContext;
 
 /**
  *

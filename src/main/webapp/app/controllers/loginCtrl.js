@@ -6,7 +6,11 @@ app.controller("LoginCtrl", ['$scope', '$http', '$location', '$routeParams', 'lo
       $http.post('http://localhost:8080/gihans-e-shoping/rest/user/login', $scope.user).
               success(function (data, status, headers, config) {
                 loginService.setLoggedInUser(data);
-                $location.path('admin-dashboard');
+                if ($location.path() === '/customer/login') {
+                  $location.path('cart');
+                } else {
+                  $location.path('admin-dashboard');
+                }
               }).
               error(function (data, status, headers, config) {
                 $scope.showError = true;

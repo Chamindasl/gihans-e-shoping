@@ -46,6 +46,10 @@ app.config(['$routeProvider',
                     templateUrl: 'views/admin-login.html',
                     controller: 'LoginCtrl'
                 }).
+                when('/customer/login', {
+                    templateUrl: 'views/admin-login.html',
+                    controller: 'LoginCtrl'
+                }).
                 when('/admin-dashboard', {
                     templateUrl: 'views/admin-dashboard.html',
                     controller: 'DashboardCtrl'

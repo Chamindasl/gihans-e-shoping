@@ -38,7 +38,7 @@ public class OrderItem implements Serializable {
     private Double price;
     @Column(name = "quantity")
     private Integer quantity;
-    @JoinColumn(name = "order", referencedColumnName = "id")
+    @JoinColumn(name = "client_order", referencedColumnName = "id")
     @ManyToOne
     private ClientOrder clientOrder;
     @JoinColumn(name = "item", referencedColumnName = "id")
