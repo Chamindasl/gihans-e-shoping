@@ -33,6 +33,12 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "ClientOrder.findAll", query = "SELECT c FROM ClientOrder c")})
 public class ClientOrder implements Serializable {
+    @Column(name = "payment_received_date")
+    @Temporal(TemporalType.DATE)
+    private Date paymentReceivedDate;
+    @Column(name = "delivered_data")
+    @Temporal(TemporalType.DATE)
+    private Date deliveredData;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -80,9 +86,10 @@ public class ClientOrder implements Serializable {
 
     public enum OrderStatus {
 
-        PENDING(1),
-        BANK_CONFIRMED(2),
-        RECEIVED(3);
+        NEW(1),
+        PROCESSING(2),
+        DISPACHED(3),
+        DELIVERED(4);
 
         private final int id;
 
@@ -191,6 +198,22 @@ public class ClientOrder implements Serializable {
     @Override
     public String toString() {
         return "com.gihans.gs.model.ClientOrder[ id=" + id + " ]";
+    }
+
+    public Date getPaymentReceivedDate() {
+        return paymentReceivedDate;
+    }
+
+    public void setPaymentReceivedDate(Date paymentReceivedDate) {
+        this.paymentReceivedDate = paymentReceivedDate;
+    }
+
+    public Date getDeliveredData() {
+        return deliveredData;
+    }
+
+    public void setDeliveredData(Date deliveredData) {
+        this.deliveredData = deliveredData;
     }
 
 }

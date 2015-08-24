@@ -1,0 +1,46 @@
+<section id="cart_items">
+  <div class="container">
+
+    <div class="row bottom20">
+      <div ng-include src="'views/parts/menu.html'"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5 pull-right">
+        <div class="input-group">
+          <input ng-model="searchText" type="text" class="form-control" placeholder="Search for Orders...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container top20" >
+
+    <div class="table-responsive cart_info">
+      <table class="table table-condensed">
+
+        <thead ng-class="active" >
+        <th class="">Customer Name</th>
+        <th>Display Name</th>
+        <th>Ordered Date</th>
+        <th>Payment Status</th>
+        <th>Phone</th>
+        <th>Amount</th>
+        <th>Payment Received Date</th>
+        <th>Delivered Date</th>
+        </thead>
+        <tr ng-class="{'success': o.role.name === 'Customer', 'info': o.role.name === 'User', 'warning': o.role.name === 'Admin'}" ng-repeat="o in orders | filter:searchText">
+          <td>{{ o.email}}</td>
+          <td>{{ o.displayName}}</td>
+          <td>{{ o.firstName}}</td>
+          <td>{{ o.lastName}}</td>
+          <td>{{ o.phone}}</td>
+          <td>{{ o.role.name}}</td>
+          <td><a href="" ng-click="editUser(u)"><i class="fa fa-pencil"></i></a>></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section><!--/#do_action-->

@@ -40,7 +40,8 @@ app.controller("CartCtrl", ['$scope', '$rootScope', '$http', 'voService', 'login
       if ($scope.loggedInUser) {
         $http.post('http://localhost:8080/gihans-e-shoping/rest/order/place', $scope.indexVO)
                 .success(function (data, status, header, config) {
-                  window.location = "http://www.payeasy.lk/billpayWeb/Controller"
+                  $location.path('customer/myOrders')
+                  window.open("http://www.payeasy.lk/billpayWeb/Controller", "_blank");
                 })
                 .error(function (data, status, header, config) {
                   // error handler

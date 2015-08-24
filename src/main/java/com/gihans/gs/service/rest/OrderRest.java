@@ -13,6 +13,7 @@ import com.gihans.gs.model.vo.IndexVO;
 import com.gihans.gs.model.vo.ItemVO;
 import com.gihans.gs.model.Item;
 import com.gihans.gs.model.User;
+import com.gihans.gs.model.vo.ClientOrderVO;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +27,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import org.jboss.netty.handler.codec.http.HttpRequest;
 
 @Stateless
 @Path("/order")
@@ -37,13 +37,22 @@ public class OrderRest {
 
     @GET
     @Produces("application/json")
-    public List<CategoryVO> findAll() {
-        final List<Category> findAll = em.createQuery("select c from Category c where c.parent IS NULL", Category.class).getResultList();
-        final List<CategoryVO> catVos = new ArrayList<>();
-        for (Category c : findAll) {
-            catVos.add(toCategoryVO(c));
+    public List<ClientOrderVO> findAll(@Context final HttpServletRequest request) {
+        final List<ClientOrder> orders;
+        final List<ClientOrderVO> result = new ArrayList<>();
+        final User user = (User) request.getSession().getAttribute("loggedInUser");
+
+        if (user.getRole().getName().equals("Customer")) {
+            orders = em.createQuery("select o from ClientOrder o where o.user.id=:user", ClientOrder.class)
+                    .setParameter("user", user.getId())
+                    .getResultList();
+        } else {
+            orders = em.createQuery("select o from ClientOrder o", ClientOrder.class).getResultList();
         }
-        return catVos;
+        for (final ClientOrder co : orders) {
+            result.add(new ClientOrderVO(co));
+        }
+        return result;
     }
 
     @POST
@@ -56,6 +65,7 @@ public class OrderRest {
         co.setOrderItemList(orderItems);
         co.setOrderedDate(new Date());
         co.setPaymentStatus(ClientOrder.PaymentStatus.PENDING.getId());
+        co.setOrderStatus(ClientOrder.OrderStatus.NEW.getId());
         co.setUser((User) request.getSession().getAttribute("loggedInUser"));
         em.persist(co);
         double total = 0d;
