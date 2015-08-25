@@ -1,7 +1,7 @@
 <section id="cart_items">
   <div class="container">
 
-    <div class="row bottom20">
+    <div class="row bottom20" ng-show="loggedInUser.role.name === 'Admin' || loggedInUser.role.name === 'User'">
       <div ng-include src="'views/parts/menu.html'"></div>
     </div>
 
@@ -22,23 +22,44 @@
       <table class="table table-condensed">
 
         <thead ng-class="active" >
-        <th class="">Customer Name</th>
-        <th>Display Name</th>
+        <th class="" ng-show="loggedInUser.role.name === 'Admin' || loggedInUser.role.name === 'User'">Display Name</th>
         <th>Ordered Date</th>
-        <th>Payment Status</th>
-        <th>Phone</th>
+        <th>Order Status</th>
         <th>Amount</th>
+        <th>Payment Status</th>
         <th>Payment Received Date</th>
         <th>Delivered Date</th>
+        <th>View Items</th>
+        <th ng-show="loggedInUser.role.name === 'Admin' || loggedInUser.role.name === 'User'">Edit</th>
         </thead>
-        <tr ng-class="{'success': o.role.name === 'Customer', 'info': o.role.name === 'User', 'warning': o.role.name === 'Admin'}" ng-repeat="o in orders | filter:searchText">
-          <td>{{ o.email}}</td>
-          <td>{{ o.displayName}}</td>
-          <td>{{ o.firstName}}</td>
-          <td>{{ o.lastName}}</td>
-          <td>{{ o.phone}}</td>
-          <td>{{ o.role.name}}</td>
-          <td><a href="" ng-click="editUser(u)"><i class="fa fa-pencil"></i></a>></td>
+        <tr ng-repeat="o in orders | filter:searchText">
+          <td ng-show="loggedInUser.role.name === 'Admin' || loggedInUser.role.name === 'User'">{{ o.user.displayName}}</td>
+          <td>{{ o.orderedDate}}</td>
+          <td>{{ o.orderStatus}}</td>
+          <td class="pull-right">{{ o.amount}}</td>
+          <td>{{ o.paymentStatus}}</td>
+          <td>{{ o.paymentDate}}</td>
+          <td>{{ o.deliveredData}}</td>
+          <td><a href="" ng-click="viewOrder(o)"><i class="fa fa-list"></i></a></td>
+          <td ng-show="loggedInUser.role.name === 'Admin' || loggedInUser.role.name === 'User'"><a href="" ng-click="editUser(u)"><i class="fa fa-pencil"></i></a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="table-responsive cart_info" ng-show="order.orderItems.length > 0">
+      <table class="table table-condensed">
+        <thead ng-class="active" >
+        <th class="">Item</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Amount</th>
+        </thead>
+        <tr ng-repeat="i in order.orderItems">
+          <td class="cart_product"><a href=""><img src="{{i.item.cartImage}}" alt=""></a></td>
+          <td>{{i.item.name}}</td>
+          <td >{{i.price}}</td>
+          <td >{{i.quantity}}</td>
+          <td >{{i.price * i.quantity}}</td>
         </tr>
       </table>
     </div>

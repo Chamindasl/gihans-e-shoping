@@ -33,6 +33,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "ClientOrder.findAll", query = "SELECT c FROM ClientOrder c")})
 public class ClientOrder implements Serializable {
+
     @Column(name = "payment_received_date")
     @Temporal(TemporalType.DATE)
     private Date paymentReceivedDate;
@@ -75,13 +76,20 @@ public class ClientOrder implements Serializable {
 
         PaymentStatus(int id) {
             this.id = id;
-            
         }
 
         public int getId() {
             return id;
         }
-       
+
+        public static PaymentStatus get(int id) {
+            for (PaymentStatus ps : PaymentStatus.values()) {
+                if (ps.getId() == id) {
+                    return ps;
+                }
+            }
+            return null;
+        }
     }
 
     public enum OrderStatus {
@@ -95,13 +103,22 @@ public class ClientOrder implements Serializable {
 
         OrderStatus(int id) {
             this.id = id;
-            
+
         }
 
         public int getId() {
             return id;
         }
-       
+
+        public static OrderStatus get(int id) {
+            for (OrderStatus ps : OrderStatus.values()) {
+                if (ps.getId() == id) {
+                    return ps;
+                }
+            }
+            return null;
+        }
+
     }
 
     public ClientOrder() {

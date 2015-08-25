@@ -1,7 +1,6 @@
 'use strict';
-app.controller("OrderCtrl", ['$scope', '$rootScope', '$http', '$location', 'voService', 'dataService',
-  function ($scope, $rootScope, $http, $location, voService, dataService) {
-
+app.controller("OrderCtrl", ['$scope', 'loginService', '$http', '$location', 'voService', 'dataService',
+  function ($scope, loginService, $http, $location, voService, dataService) {
 
     $scope.loadAllOrders = function () {
 
@@ -13,6 +12,11 @@ app.controller("OrderCtrl", ['$scope', '$rootScope', '$http', '$location', 'voSe
 
     $scope.init = function () {
       $scope.loadAllOrders();
+      $scope.loggedInUser = loginService.getLoggedInUser();
+    };
+
+    $scope.viewOrder = function (order) {
+      $scope.order = order;
     };
 
     $scope.init();

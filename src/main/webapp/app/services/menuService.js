@@ -62,6 +62,15 @@ app.service('menuService', function ($http, loginService) {
           url: 'admin',
           active: false
         }]
+    }, {
+      name: 'Order',
+      url: '',
+      active: false,
+      subs: [{
+          name: 'View Orders',
+          url: 'order',
+          active: false
+        }]
     }
   ];
 
@@ -95,6 +104,15 @@ app.service('menuService', function ($http, loginService) {
       subs: [{
           name: 'Logout',
           url: 'admin',
+          active: false
+        }]
+    }, {
+      name: 'Order',
+      url: '',
+      active: false,
+      subs: [{
+          name: 'View Orders',
+          url: 'order',
           active: false
         }]
     }

@@ -6,7 +6,10 @@
 package com.gihans.gs.model.vo;
 
 import com.gihans.gs.model.ClientOrder;
+import com.gihans.gs.model.OrderItem;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -21,7 +24,8 @@ public class ClientOrderVO {
     public Date paymentDate;
     public String orderStatus;
     public String paymentStatus;
-    public UserVO userVO;
+    public UserVO user;
+    public List<OrderItemVO> orderItems = new ArrayList<>();
 
     public ClientOrderVO() {
     }
@@ -32,8 +36,12 @@ public class ClientOrderVO {
         this.deliveredData = clientOrder.getDeliveredData();
         this.orderedDate = clientOrder.getOrderedDate();
         this.paymentDate = clientOrder.getPaymentReceivedDate();
-        this.orderStatus = "" + clientOrder.getOrderStatus();
-        this.paymentStatus = "" + clientOrder.getPaymentStatus();
+        this.orderStatus =  ClientOrder.OrderStatus.get(clientOrder.getOrderStatus()).name();
+        this.paymentStatus = ClientOrder.PaymentStatus.get(clientOrder.getPaymentStatus()).name();
+        this.user = new UserVO(clientOrder.getUser());
+        for (final OrderItem orderItem : clientOrder.getOrderItemList()) {
+            orderItems.add(new OrderItemVO(orderItem));
+        }
     }
 
 }
