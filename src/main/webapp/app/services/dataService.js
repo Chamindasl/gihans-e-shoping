@@ -1,14 +1,14 @@
 app.service('dataService', function ($http) {
 
   this.getAllCategories = function () {
-    var promise = $http.get('http://localhost:8080/gihans-e-shoping/rest/categoryVo').then(function (response) {
+    var promise = $http.get('http://localhost:8080/gihans-e-shoping/rest/category').then(function (response) {
       return response.data;
     });
     return promise;
   };
 
   this.getAllProvinces = function () {
-    var promise = $http.get('http://localhost:8080/gihans-e-shoping/rest/provinceVO').then(function (response) {
+    var promise = $http.get('http://localhost:8080/gihans-e-shoping/rest/province').then(function (response) {
       return response.data;
     });
     return promise;

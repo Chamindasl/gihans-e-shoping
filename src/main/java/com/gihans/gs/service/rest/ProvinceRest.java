@@ -17,7 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 @Stateless
-@Path("/provinceVO")
+@Path("/province")
 public class ProvinceRest {
 
     @PersistenceContext(unitName = "gihans_PU")

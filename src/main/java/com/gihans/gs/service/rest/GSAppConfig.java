@@ -21,8 +21,7 @@ public class GSAppConfig extends Application {
     private static final Set<Class<?>> CLASSES;
 
     static {
-        HashSet<Class<?>> tmp = new HashSet<Class<?>>();
-        tmp.add(CategoryFacadeREST.class);
+        final HashSet<Class<?>> tmp = new HashSet<>();
         tmp.add(IndexRest.class);
         tmp.add(ItemRest.class);
 

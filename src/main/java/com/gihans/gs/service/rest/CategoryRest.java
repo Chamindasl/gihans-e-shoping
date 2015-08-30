@@ -19,7 +19,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 @Stateless
-@Path("/categoryVo")
+@Path("/category")
 public class CategoryRest {
 
     @PersistenceContext(unitName = "gihans_PU")

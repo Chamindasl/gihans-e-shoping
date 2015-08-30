@@ -56,6 +56,26 @@ public class OrderRest {
     }
 
     @POST
+    @Path("changeStatus")
+    @Produces("application/json")
+    @Consumes("application/json")
+    public ClientOrderVO changeStatus(final ClientOrderVO clientOrderVO) {
+        final ClientOrder co = em.find(ClientOrder.class, clientOrderVO.id);
+        final ClientOrder.OrderStatus orderStatus = ClientOrder.OrderStatus.valueOf(clientOrderVO.orderStatus);
+        final ClientOrder.PaymentStatus paymentStatus = ClientOrder.PaymentStatus.valueOf(clientOrderVO.paymentStatus);
+        co.setOrderStatus(orderStatus.getId());
+        co.setPaymentStatus(paymentStatus.getId());
+        final Date date = new Date();
+        if (paymentStatus == ClientOrder.PaymentStatus.RECEIVED) {
+            co.setPaymentReceivedDate(date);
+        }
+        if (orderStatus == ClientOrder.OrderStatus.DELIVERED) {
+            co.setDeliveredData(date);
+        }
+        return clientOrderVO;
+    }
+
+    @POST
     @Path("place")
     @Produces("application/json")
     @Consumes("application/json")
@@ -81,22 +101,6 @@ public class OrderRest {
         }
         co.setAmount(total);
         return indexVO;
-    }
-
-    private static CategoryVO toCategoryVO(final Category category) {
-        final CategoryVO categoryVO = new CategoryVO();
-        categoryVO.id = category.getId();
-        categoryVO.name = category.getName();
-        for (final Category subCat : category.getSubCategories()) {
-            if (null == categoryVO.subCategories) {
-                categoryVO.subCategories = new ArrayList<>();
-            }
-            final CategoryVO subCatVo = new CategoryVO();
-            subCatVo.id = subCat.getId();
-            subCatVo.name = subCat.getName();
-            categoryVO.subCategories.add(subCatVo);
-        }
-        return categoryVO;
     }
 
 }

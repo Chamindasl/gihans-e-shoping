@@ -37,7 +37,7 @@ app.controller("CategoryCtrl", ['$scope', '$rootScope', '$http', 'dataService',
 
     $scope.saveCategory = function () {
       if ($scope.catForm.$valid) {
-        $http.post('http://localhost:8080/gihans-e-shoping/rest/categoryVo', $scope.category)
+        $http.post('http://localhost:8080/gihans-e-shoping/rest/category', $scope.category)
                 .success(function (data, status, header, config) {
                   $scope.loadCagetories();
                   $scope.category.parentCategory = $scope.selectedCategory;

@@ -34,13 +34,6 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "ClientOrder.findAll", query = "SELECT c FROM ClientOrder c")})
 public class ClientOrder implements Serializable {
 
-    @Column(name = "payment_received_date")
-    @Temporal(TemporalType.DATE)
-    private Date paymentReceivedDate;
-    @Column(name = "delivered_data")
-    @Temporal(TemporalType.DATE)
-    private Date deliveredData;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,7 +47,6 @@ public class ClientOrder implements Serializable {
     private Integer paymentStatus;
     @Column(name = "order_status")
     private Integer orderStatus;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "amount")
     private Double amount;
     @OneToMany(mappedBy = "clientOrder", cascade = CascadeType.ALL)
@@ -65,6 +57,12 @@ public class ClientOrder implements Serializable {
     @JoinColumn(name = "user", referencedColumnName = "id")
     @ManyToOne
     private User user;
+    @Column(name = "payment_received_date")
+    @Temporal(TemporalType.DATE)
+    private Date paymentReceivedDate;
+    @Column(name = "delivered_data")
+    @Temporal(TemporalType.DATE)
+    private Date deliveredData;
 
     public enum PaymentStatus {
 
@@ -96,7 +94,7 @@ public class ClientOrder implements Serializable {
 
         NEW(1),
         PROCESSING(2),
-        DISPACHED(3),
+        DISPATCHED(3),
         DELIVERED(4);
 
         private final int id;
