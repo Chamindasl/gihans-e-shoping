@@ -130,16 +130,16 @@ public class ItemRest {
 
     //save to somewhere
     private void writeFile(byte[] content, String filename) throws IOException {
-
-        final File file = new File(filename);
-        if (!file.exists()) {
-            file.createNewFile();
+        if (null != content && content.length > 0) {
+            final File file = new File(filename);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            try (FileOutputStream fop = new FileOutputStream(file)) {
+                fop.write(content);
+                fop.flush();
+            }
         }
-        try (FileOutputStream fop = new FileOutputStream(file)) {
-            fop.write(content);
-            fop.flush();
-        }
-
     }
 
     private Double readDouble(final MultipartFormDataInput input, final String param) {
