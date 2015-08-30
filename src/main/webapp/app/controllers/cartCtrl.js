@@ -47,6 +47,7 @@ app.controller("CartCtrl", ['$scope', '$rootScope', '$http', 'voService', 'login
                   // error handler
                 });
       } else {
+        voService.setRedirectUrl('cart')
         $location.path('customer/login');
       }
     };

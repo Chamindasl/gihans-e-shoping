@@ -1,15 +1,20 @@
 'use strict';
-app.controller("LoginCtrl", ['$scope', '$http', '$location', '$routeParams', 'loginService',
-  function ($scope, $http, $location, $routeParams, loginService) {
+app.controller("LoginCtrl", ['$scope', '$http', '$location', 'loginService', 'voService',
+  function ($scope, $http, $location, loginService, voService) {
 
     $scope.adminLogin = function (user) {
       $http.post('http://localhost:8080/gihans-e-shoping/rest/user/login', $scope.user).
               success(function (data, status, headers, config) {
+                $scope.user = data;
                 loginService.setLoggedInUser(data);
-                if ($location.path() === '/customer/login') {
-                  $location.path('cart');
-                } else {
+                if (voService.getRedirectUrl()) {
+                  var rdu = voService.getRedirectUrl();
+                  voService.setRedirectUrlUndefined();
+                  $location.path(rdu);
+                } else  if ($scope.user.role.name === 'Admin' || $scope.user.role.name === 'User') {
                   $location.path('admin-dashboard');
+                } else {
+                  $location.path('');
                 }
               }).
               error(function (data, status, headers, config) {
