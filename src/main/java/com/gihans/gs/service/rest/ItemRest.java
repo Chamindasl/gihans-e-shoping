@@ -41,8 +41,8 @@ public class ItemRest {
     @PersistenceContext(unitName = "gihans_PU")
     private EntityManager em;
 
-    private final String UPLOADED_FILE_PATH = "C:\\wildfly-8.2.0\\standalone\\deployments\\gihans-e-shoping-1.0-SNAPSHOT.war\\app\\assets\\img\\uploaded\\";
-    private final String URL_PATH = "app/assets/img/uploaded/";
+    private final String UPLOADED_FILE_PATH = "C:\\wildfly-8.2.0\\welcome-content\\ges\\uploaded\\";
+    private final String URL_PATH = "/ges/uploaded/";
 
     @POST
     @Path("create")
