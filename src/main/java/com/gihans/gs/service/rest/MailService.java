@@ -16,10 +16,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import java.io.File;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 
 /**
  *
@@ -52,8 +57,8 @@ public class MailService {
             template.process(params, sw);
             m.setText(sw.toString(), "utf-8", "html");
             Transport.send(m);
-        } catch (Exception ex) {
-            System.out.println(" ex " + ex);
+        } catch (IOException | MessagingException | TemplateException ex) {
+            Logger.getLogger(MailService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

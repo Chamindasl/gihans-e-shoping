@@ -1,9 +1,9 @@
-<section><!--form-->
+<setion>
   <div class="container">
-    <div class="row bottom20">
-      <div class="col-sm-4 col-sm-offset-4">
-
+    <div class="row">
+      <div class="col-sm-4" ng-class="userType === 'customer' ? 'col-sm-offset-1' : 'col-sm-offset-4'">
         <div ng-show="showError" class="alert alert-danger" role="alert">Incorrect Username or Password</div>
+        <div ng-show="showMessage" class="alert alert-info" role="alert">Please activate your account from your email and then login</div>
         <div class="login-form"><!--login form-->
           <h2>Login to your account</h2>
           <form action="#">
@@ -13,6 +13,19 @@
           </form>
         </div><!--/login form-->
       </div>
+      <div class="col-sm-1" ng-show="userType === 'customer'">
+        <h2 class="or">OR</h2>
+      </div>
+      <div class="col-sm-4" ng-show="userType === 'customer'">
+        <div class="signup-form"><!--sign up form-->
+          <h2>New User Signup!</h2>
+          <form action="#">
+            <input ng-model="user.displayName" type="text" placeholder="Display Name" />
+            <input ng-model="user.email" type="text" placeholder="Email Address" />
+            <button type="button" ng-click="userSignup(user)" class="btn btn-default">Signup</button>
+          </form>
+        </div><!--/sign up form-->
+      </div>
     </div>
   </div>
-</section>
+</setion>

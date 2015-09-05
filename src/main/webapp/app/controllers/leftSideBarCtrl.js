@@ -1,5 +1,6 @@
 'use strict';
-app.controller("LeftSideBarCtrl", function ($scope, $rootScope, $http) {
+app.controller("LeftSideBarCtrl", ['$scope', '$rootScope', '$http',
+  function ($scope, $rootScope, $http) {
 
   $scope.init = function () {
     $scope.categories = [];
@@ -136,4 +137,4 @@ app.controller("LeftSideBarCtrl", function ($scope, $rootScope, $http) {
   };
 
   $scope.loadCategories();
-});
+}]);

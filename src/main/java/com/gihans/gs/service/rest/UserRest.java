@@ -13,6 +13,8 @@ import com.gihans.gs.model.User;
 import com.gihans.gs.model.vo.RoleVO;
 import com.gihans.gs.model.vo.UserVO;
 import java.net.URISyntaxException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -64,7 +66,8 @@ public class UserRest {
             tShip.setCity(em.find(City.class, tShip.getCity().getId()));
             user.setActive(false);
             user.setUuid(UUID.randomUUID().toString());
-            //tBill.
+            // encrypt the password
+            user.setPassword(getMD5Password(user.getPassword()));
             em.persist(user);
             em.persist(tBill);
             em.persist(tShip);
@@ -109,7 +112,7 @@ public class UserRest {
     @GET
     @Path("sessionUser")
     @Produces("application/json")
-    public UserVO findAllUsers(@Context final HttpServletRequest request) {
+    public UserVO findLoggedInUser(@Context final HttpServletRequest request) {
         final Object u = request.getSession().getAttribute("loggedInUser");
         if (null == u) {
             return null;
@@ -125,7 +128,7 @@ public class UserRest {
     public Response loginUser(final UserVO userVo, @Context final HttpServletRequest request) {
         final TypedQuery<User> query = em.createQuery("select u from User u where u.email=:email and u.password=:password", User.class);
         query.setParameter("email", userVo.email);
-        query.setParameter("password", userVo.password);
+        query.setParameter("password", getMD5Password(userVo.password));
         final List<User> users = query.getResultList();
         if (users.size() > 0) {
             final User user = users.get(0);
@@ -134,6 +137,25 @@ public class UserRest {
         } else {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
+    }
+
+    private String getMD5Password(final String password) {
+        try {
+            final MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(password.getBytes());
+            final byte byteData[] = md.digest();
+            //convert the byte to hex format method 1
+            final StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < byteData.length; i++) {
+                sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            final String pwd = sb.toString();
+            System.out.println("" + pwd);
+            return pwd;
+        } catch (NoSuchAlgorithmException ex) {
+        }
+        // this should not reach
+        return null;
     }
 
 }

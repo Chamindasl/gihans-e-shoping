@@ -1,6 +1,7 @@
 app.service('voService', function (dataService) {
   var indexVO = {};
   var redirectUrl = undefined;
+  var signupUser = undefined;
 
   this.getIndexVO = function () {
     return indexVO;
@@ -20,6 +21,18 @@ app.service('voService', function (dataService) {
 
   this.setRedirectUrlUndefined = function () {
     redirectUrl = undefined;
+  };
+
+  this.getSignupUser = function () {
+    return signupUser;
+  };
+
+  this.setSignupUser = function (ivo) {
+    signupUser = ivo;
+  };
+
+  this.setSignupUserUndefined = function () {
+    signupUser = undefined;
   };
 
 });

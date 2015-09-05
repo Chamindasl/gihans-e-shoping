@@ -34,9 +34,14 @@ app.controller("UserCtrl", ['$scope', '$rootScope', '$http', '$location', 'voSer
       $scope.provinces = [];
       $scope.loadRefData();
       $scope.loadAllUsers();
+      if (voService.getSignupUser()) {
+        $scope.user = voService.getSignupUser();
+        voService.setSignupUserUndefined();
+        $scope.requestFromUser = true;
+      } else {
+        $scope.user = {};
+      };
 
-      $scope.user = { };
-      
 //      $scope.user = {
 //        email: "chaminda.sl@gmail.com",
 //        displayName: "Chaminda",
@@ -69,13 +74,22 @@ app.controller("UserCtrl", ['$scope', '$rootScope', '$http', '$location', 'voSer
 ////          business: true
 ////        }
 //      };
-//
+
     };
 
     $scope.init();
 
     $scope.step1 = function () {
       if ($scope.userFormS1.$valid) {
+        if (!$scope.user.role) {
+          var i = 0;
+          for (; i < $scope.roles.length; i++) {
+            if ($scope.roles[i].name === 'Customer') {
+              $scope.user.role = $scope.roles[i];
+              break;
+            }
+          }
+        }
         $scope.step = 2;
       }
     };
@@ -97,7 +111,7 @@ app.controller("UserCtrl", ['$scope', '$rootScope', '$http', '$location', 'voSer
     $scope.editUser = function (user) {
       $scope.user = user;
       $scope.step = 1;
-      $location.path(user/add)
+      $location.path("user/add");
     };
 
     $scope.saveUser = function () {
@@ -105,7 +119,11 @@ app.controller("UserCtrl", ['$scope', '$rootScope', '$http', '$location', 'voSer
       if ($scope.userFormS1.$valid && $scope.userFormS3.$valid && $scope.userFormS3.$valid) {
         $http.post('http://localhost:8080/gihans-e-shoping/rest/user', $scope.user)
                 .success(function (data, status, header, config) {
-                  $location.path("user/list")
+                  if ($scope.requestFromUser) {
+                    $location.path("customer/login/after-signup");
+                  } else {
+                    $location.path("user/list");
+                  }
                 })
                 .error(function (data, status, header, config) {
                   // error handler
