@@ -119,7 +119,7 @@ app.service('menuService', function ($http, loginService) {
   ];
 
   this.getMenus = function () {
-    return adminMenus;
+//    return adminMenus;
     var user = loginService.getLoggedInUser();
     if (!user) {
       loginService.getLoggedInUserFromSession().then(function (data) {
