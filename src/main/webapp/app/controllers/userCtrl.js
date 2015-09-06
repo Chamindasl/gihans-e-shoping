@@ -43,6 +43,10 @@ app.controller("UserCtrl", ['$scope', '$rootScope', '$http', '$location', 'voSer
       };
 
 //      $scope.user = {
+//      added extra comments in here 
+//      
+//      just for testing 
+//      
 //        email: "chaminda.sl@gmail.com",
 //        displayName: "Chaminda",
 //        password: "King1!",
