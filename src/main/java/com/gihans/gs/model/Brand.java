@@ -34,6 +34,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     @NamedQuery(name = "Brand.findById", query = "SELECT b FROM Brand b WHERE b.id = :id"),
     @NamedQuery(name = "Brand.findByName", query = "SELECT b FROM Brand b WHERE b.name = :name")})
 public class Brand implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,8 +46,18 @@ public class Brand implements Serializable {
     private String name;
     @OneToMany(mappedBy = "brand")
     private List<Item> itemList;
+    @Column(name = "active")
+    private Boolean active;
 
     public Brand() {
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Brand(Integer id) {
@@ -103,5 +114,5 @@ public class Brand implements Serializable {
     public String toString() {
         return "com.gihans.gs.model.Brand[ id=" + id + " ]";
     }
-    
+
 }

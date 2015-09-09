@@ -28,6 +28,18 @@ public class BrandRest {
     @GET
     @Produces("application/json")
     public List<BrandVO> findAll() {
+        final List<Brand> findAll = em.createQuery("select b from Brand b where b.active=TRUE", Brand.class).getResultList();
+        final List<BrandVO> brands = new ArrayList<>();
+        for (final Brand b : findAll) {
+            brands.add(new BrandVO(b));
+        }
+        return brands;
+    }
+
+    @GET
+    @Path("withInactive")
+    @Produces("application/json")
+    public List<BrandVO> findAllWithInactive() {
         final List<Brand> findAll = em.createQuery("select b from Brand b", Brand.class).getResultList();
         final List<BrandVO> brands = new ArrayList<>();
         for (final Brand b : findAll) {
@@ -41,8 +53,13 @@ public class BrandRest {
     @Consumes("application/json")
     public BrandVO save(final BrandVO brandVO) {
         final Brand toBrand = brandVO.toBrand();
-        toBrand.setId(null);
-        em.persist(toBrand);
+        if (brandVO.id == -1) {
+            toBrand.setId(null);
+            toBrand.setActive(Boolean.TRUE);
+            em.persist(toBrand);
+        } else {
+            em.merge(toBrand);
+        }
         return brandVO;
     }
 

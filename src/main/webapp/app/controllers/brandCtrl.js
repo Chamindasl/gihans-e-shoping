@@ -4,7 +4,7 @@ app.controller("BrandCtrl", ['$scope', '$rootScope', '$http', 'dataService',
 
     $scope.loadBrands = function () {
 
-      dataService.getAllBrands().then(function (data) {
+      dataService.getAllBrandsWithInactive().then(function (data) {
         $scope.brands = data;
       });
     };
@@ -26,6 +26,16 @@ app.controller("BrandCtrl", ['$scope', '$rootScope', '$http', 'dataService',
                   // error handler
                 });
       }
+    };
+
+    $scope.editBrand = function (brand) {
+      $http.post('http://localhost:8080/gihans-e-shoping/rest/brand', brand)
+              .success(function (data, status, header, config) {
+                $scope.loadBrands();
+              })
+              .error(function (data, status, header, config) {
+                // error handler
+              });
     };
 
   }]);

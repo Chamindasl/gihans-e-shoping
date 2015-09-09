@@ -28,5 +28,12 @@ app.service('dataService', function ($http) {
     return promise;
   };
 
+  this.getAllBrandsWithInactive = function () {
+    var promise = $http.get('http://localhost:8080/gihans-e-shoping/rest/brand/withInactive').then(function (response) {
+      return response.data;
+    });
+    return promise;
+  };
+
 
 });

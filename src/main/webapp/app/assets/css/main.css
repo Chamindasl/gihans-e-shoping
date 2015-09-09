@@ -757,6 +757,10 @@ h2.title:before{
     white-space: nowrap;
 }
 
+.badge-no-bg{
+    background-color: transparent;
+}
+
 .panel-body ul{
     padding-left: 20px;
 }

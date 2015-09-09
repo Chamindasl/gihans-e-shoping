@@ -1,6 +1,6 @@
 'use strict';
 var app = angular.module('app', [
-  'ngRoute', 'angularUtils.directives.dirPagination'
+  'ngRoute', 'angularUtils.directives.dirPagination', 'toggle-switch'
 ]);
 
 app.config(['$routeProvider',
