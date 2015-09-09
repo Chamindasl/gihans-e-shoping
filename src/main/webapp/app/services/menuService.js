@@ -118,6 +118,14 @@ app.service('menuService', function ($http, loginService) {
     }
   ];
 
+  this.getUserMenus = function () {
+    return userMenus;
+  };
+
+  this.getAdminMenus = function () {
+    return adminMenus;
+  };
+
   this.getMenus = function () {
 //    return adminMenus;
     var user = loginService.getLoggedInUser();

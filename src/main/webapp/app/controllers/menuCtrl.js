@@ -1,11 +1,22 @@
 'use strict';
-app.controller("MenuCtrl", ['$scope', '$rootScope', '$http', '$location', 'menuService',
-  function ($scope, $rootScope, $http, $location, menuService) {
+app.controller("MenuCtrl", ['$scope', '$rootScope', '$http', '$location', 'menuService', 'loginService',
+  function ($scope, $rootScope, $http, $location, menuService, loginService) {
 
     $scope.init = function () {
       var menus = menuService.getMenus();
+      var user;
       if (!menus) {
-        $location.path('admin');
+        loginService.getLoggedInUserFromSession().then(function (data) {
+          user = data;
+          loginService.setLoggedInUser(user);
+          if (user && user.role.name === 'Admin') {
+            $scope.menus = menuService.getAdminMenus();
+          } else if (user && user.role.name === 'User') {
+            $scope.menus = menuService.getUserMenus();
+          } else {
+            $location.path('admin');
+          }
+        });
       } else {
         $scope.menus = menus;
       }
