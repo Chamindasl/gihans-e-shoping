@@ -29,7 +29,7 @@
       <div  class="col-sm-12">
         <div  class="list-group">
           <a href="" class="category list-group-item" ng-repeat="b in brands" >
-            <span class="badge badge-no-bg"><toggle-switch class="switch-mini switch-warning" ng-model="b.active" ng-click="editBrand(b);"></toggle-switch></span>
+            <span class="badge badge-no-bg"><toggle-switch class="switch-mini switch-warning" ng-model="b.active" ng-click="editBrand(b);" on-label="Active" off-label="Inactive"></toggle-switch></span>
             <span class="badge">{{b.noOfItems}}</span>
             {{b.name}} 
           </a>
