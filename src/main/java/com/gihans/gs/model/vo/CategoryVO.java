@@ -15,5 +15,6 @@ public class CategoryVO extends IdNameVO {
     public boolean selected;
     public List<CategoryVO> subCategories;
     public CategoryVO parentCategory;
+    public boolean active;
     
 }

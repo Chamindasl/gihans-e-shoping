@@ -37,6 +37,7 @@
       <div  class="col-sm-6">
         <div  class="list-group">
           <a href="" class="category list-group-item" ng-repeat="c in categories" ng-click="itemClicked(c)" ng-class="{ 'ge': c.id === selectedCategory.id }">
+            <span class="badge badge-no-bg"><toggle-switch class="switch-mini switch-warning" ng-model="c.active" ng-click="editCategory(c);" on-label="Active" off-label="Inactive"></toggle-switch></span>
             <span class="badge">{{c.subCategories.length}}</span>
             {{c.name}}
           </a>
@@ -46,6 +47,7 @@
       <div class="col-sm-6">
         <div  class="list-group">
           <a href="" class="category list-group-item" ng-repeat="c in selectedCategory.subCategories">
+          <span class="badge badge-no-bg"><toggle-switch class="switch-mini switch-warning" ng-model="c.active" ng-click="editCategory(c);" on-label="Active" off-label="Inactive"></toggle-switch></span>
             {{c.name}}
           </a>
         </div>

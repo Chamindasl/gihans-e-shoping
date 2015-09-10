@@ -28,12 +28,34 @@ public class CategoryRest {
     @GET
     @Produces("application/json")
     public List<CategoryVO> findAll() {
+        final List<Category> findAll = em.createQuery("select c from Category c where c.parent IS NULL and c.active=TRUE", Category.class).getResultList();
+        final List<CategoryVO> catVos = new ArrayList<>();
+        for (Category c : findAll) {
+            catVos.add(toCategoryVO(c, true));
+        }
+        return catVos;
+    }
+
+    @GET
+    @Path("withInactive")
+    @Produces("application/json")
+    public List<CategoryVO> findAllWithInactive() {
         final List<Category> findAll = em.createQuery("select c from Category c where c.parent IS NULL", Category.class).getResultList();
         final List<CategoryVO> catVos = new ArrayList<>();
         for (Category c : findAll) {
-            catVos.add(toCategoryVO(c));
+            catVos.add(toCategoryVO(c, false));
         }
         return catVos;
+    }
+
+    @POST
+    @Path("edit")
+    @Produces("application/json")
+    @Consumes("application/json")
+    public CategoryVO edit(final CategoryVO categoryVO) {
+        final Category c = em.find(Category.class, Integer.parseInt("" + categoryVO.id));
+        c.setActive(categoryVO.active);
+        return categoryVO;
     }
 
     @POST
@@ -42,6 +64,7 @@ public class CategoryRest {
     public CategoryVO save(final CategoryVO categoryVO) {
         final Category category = new Category();
         category.setName(categoryVO.name);
+        category.setActive(Boolean.TRUE);
         if (null != categoryVO.parentCategory) {
             category.setParent(em.find(Category.class, Integer.parseInt("" + categoryVO.parentCategory.id)));
         }
@@ -49,10 +72,11 @@ public class CategoryRest {
         return categoryVO;
     }
 
-    private static CategoryVO toCategoryVO(final Category category) {
+    private static CategoryVO toCategoryVO(final Category category, final boolean active) {
         final CategoryVO categoryVO = new CategoryVO();
         categoryVO.id = category.getId();
         categoryVO.name = category.getName();
+        categoryVO.active = category.getActive();
         for (final Category subCat : category.getSubCategories()) {
             if (null == categoryVO.subCategories) {
                 categoryVO.subCategories = new ArrayList<>();
@@ -60,7 +84,12 @@ public class CategoryRest {
             final CategoryVO subCatVo = new CategoryVO();
             subCatVo.id = subCat.getId();
             subCatVo.name = subCat.getName();
-            categoryVO.subCategories.add(subCatVo);
+            subCatVo.active = subCat.getActive();
+            if (!active) {
+                categoryVO.subCategories.add(subCatVo);
+            } else if (active && subCat.getActive()) {
+                categoryVO.subCategories.add(subCatVo);
+            }
         }
         return categoryVO;
     }

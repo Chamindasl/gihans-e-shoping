@@ -4,13 +4,13 @@ app.controller("CategoryCtrl", ['$scope', '$rootScope', '$http', 'dataService',
 
     $scope.loadCagetories = function () {
 
-      dataService.getAllCategories().then(function (data) {
+      dataService.getAllCategoriesWithInactive().then(function (data) {
         $scope.categories = data;
         if ($scope.selectedCategory) {
           for (var i = 0; i < $scope.categories.length; i++) {
             if ($scope.selectedCategory.id === $scope.categories[i].id) {
               $scope.selectedCategory = $scope.categories[i];
-              
+
             }
           }
         }
@@ -47,6 +47,15 @@ app.controller("CategoryCtrl", ['$scope', '$rootScope', '$http', 'dataService',
                   // error handler
                 });
       }
+    };
+
+    $scope.editCategory = function (category) {
+      $http.post('http://localhost:8080/gihans-e-shoping/rest/category/edit', category)
+              .success(function (data, status, header, config) {
+              })
+              .error(function (data, status, header, config) {
+                // error handler
+              });
     };
 
   }]);

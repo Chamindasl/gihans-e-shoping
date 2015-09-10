@@ -22,10 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonBackReference;
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 
 /**
@@ -40,6 +37,7 @@ import org.codehaus.jackson.annotate.JsonManagedReference;
     @NamedQuery(name = "Category.findById", query = "SELECT c FROM Category c WHERE c.id = :id"),
     @NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :name")})
 public class Category implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,6 +63,9 @@ public class Category implements Serializable {
     @OneToMany(mappedBy = "category")
     private List<Item> itemList;
 
+    @Column(name = "active")
+    private Boolean active;
+
     public Category() {
     }
 
@@ -83,6 +84,14 @@ public class Category implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public String getName() {
@@ -142,5 +151,5 @@ public class Category implements Serializable {
     public String toString() {
         return "com.gihans.gs.model.Category[ id=" + id + " ]";
     }
-    
+
 }

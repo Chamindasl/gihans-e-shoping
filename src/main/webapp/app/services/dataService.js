@@ -7,6 +7,13 @@ app.service('dataService', function ($http) {
     return promise;
   };
 
+  this.getAllCategoriesWithInactive = function () {
+    var promise = $http.get('http://localhost:8080/gihans-e-shoping/rest/category/withInactive').then(function (response) {
+      return response.data;
+    });
+    return promise;
+  };
+
   this.getAllProvinces = function () {
     var promise = $http.get('http://localhost:8080/gihans-e-shoping/rest/province').then(function (response) {
       return response.data;
