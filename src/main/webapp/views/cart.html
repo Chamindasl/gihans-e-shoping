@@ -3,25 +3,25 @@
     <div class="table-responsive cart_info">
       <table class="table table-condensed">
         <thead>
-          <tr class="cart_menu">
-            <td class="image">Item</td>
-            <td class="description"></td>
-            <td class="price">Price</td>
-            <td class="quantity">Quantity</td>
-            <td class="total">Total</td>
-            <td></td>
-          </tr>
         </thead>
         <tbody>
+          <tr class="cart_menu">
+            <td >Item</td>
+            <td >.</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Total</td>
+            <td>.</td>
+          </tr>
           <tr ng-repeat="ci in indexVO.cartItems">
-            <td class="cart_product">
+            <td>
               <a href=""><img src="{{ci.cartImage}}" alt=""></a>
             </td>
-            <td class="cart_description">
+            <td>
               <h4><a href="">{{ci.name}}</a></h4>
             </td>
-            <td class="cart_price">
-              <p>Rs. {{ci.price}}</p>
+            <td>
+              <h4 class="pull-right"><a href="">Rs. {{ci.price}}</a></h4>
             </td>
             <td class="cart_quantity">
               <div class="cart_quantity_button">
@@ -31,7 +31,7 @@
               </div>
             </td>
             <td class="cart_total">
-              <p class="cart_total_price pull-right">Rs. {{ci.noOfItems * ci.price}}</p>
+              <h4 class="cart_total_price pull-right">Rs. {{ci.noOfItems * ci.price}}</h4>
             </td>
             <td class="cart_delete">
               <a class="cart_quantity_delete" href="" ng-click="remveFromCart(ci);"><i class="fa fa-times"></i></a>
