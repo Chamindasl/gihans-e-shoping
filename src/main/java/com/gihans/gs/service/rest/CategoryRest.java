@@ -64,11 +64,17 @@ public class CategoryRest {
     public CategoryVO save(final CategoryVO categoryVO) {
         final Category category = new Category();
         category.setName(categoryVO.name);
-        category.setActive(Boolean.TRUE);
-        if (null != categoryVO.parentCategory) {
+        category.setActive(categoryVO.active);
+        if (null != categoryVO.parentCategory && categoryVO.parentCategory.id != -1l) {
             category.setParent(em.find(Category.class, Integer.parseInt("" + categoryVO.parentCategory.id)));
         }
-        em.persist(category);
+        if (categoryVO.id == -1l) {
+            category.setActive(Boolean.TRUE);
+            em.persist(category);
+        } else {
+            category.setId(Integer.parseInt("" + categoryVO.id));
+            em.merge(category);
+        }
         return categoryVO;
     }
 
@@ -77,6 +83,10 @@ public class CategoryRest {
         categoryVO.id = category.getId();
         categoryVO.name = category.getName();
         categoryVO.active = category.getActive();
+        final CategoryVO categoryVOP = new CategoryVO();
+        categoryVOP.id = category.getId();
+        categoryVOP.name = category.getName();
+        categoryVOP.active = category.getActive();
         for (final Category subCat : category.getSubCategories()) {
             if (null == categoryVO.subCategories) {
                 categoryVO.subCategories = new ArrayList<>();
@@ -85,6 +95,7 @@ public class CategoryRest {
             subCatVo.id = subCat.getId();
             subCatVo.name = subCat.getName();
             subCatVo.active = subCat.getActive();
+            subCatVo.parentCategory = categoryVOP;
             if (!active) {
                 categoryVO.subCategories.add(subCatVo);
             } else if (active && subCat.getActive()) {

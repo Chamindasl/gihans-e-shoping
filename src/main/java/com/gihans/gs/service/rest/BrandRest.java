@@ -53,7 +53,7 @@ public class BrandRest {
     @Consumes("application/json")
     public BrandVO save(final BrandVO brandVO) {
         final Brand toBrand = brandVO.toBrand();
-        if (brandVO.id == -1) {
+        if (brandVO.id == -1l) {
             toBrand.setId(null);
             toBrand.setActive(Boolean.TRUE);
             em.persist(toBrand);
