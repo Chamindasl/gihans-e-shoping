@@ -28,6 +28,10 @@ app.controller("BrandCtrl", ['$scope', '$rootScope', '$http', 'dataService',
       }
     };
 
+    $scope.selectBrand = function (brand) {
+      $scope.brand = angular.fromJson(angular.toJson(brand));
+    };
+
     $scope.editBrand = function (brand) {
       $http.post('http://localhost:8080/gihans-e-shoping/rest/brand', brand)
               .success(function (data, status, header, config) {
