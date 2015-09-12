@@ -12,7 +12,7 @@ package com.gihans.gs.utils;
 public class StringUtils {
     
     public static boolean isEmpty(final String s) {
-        return null != s && !s.isEmpty();
+        return null == s || s.isEmpty();
     }
     
 }

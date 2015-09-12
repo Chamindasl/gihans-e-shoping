@@ -41,7 +41,7 @@ public class ItemRest {
     @PersistenceContext(unitName = "gihans_PU")
     private EntityManager em;
 
-    private final String UPLOADED_FILE_PATH = "C:\\wildfly-8.2.0\\welcome-content\\ges\\uploaded\\";
+    private final String UPLOADED_FILE_PATH = "C:\\wildfly-8.1.0.Final\\welcome-content\\ges\\uploaded\\";
     private final String URL_PATH = "/ges/uploaded/";
 
     @POST
@@ -68,12 +68,16 @@ public class ItemRest {
             final String subCat = readString(input, "subCategory");
             final String cat = readString(input, "category");
             if (StringUtils.isEmpty(subCat)) {
-                item.setCategory(em.find(Category.class, Integer.valueOf(subCat)));
+                if (StringUtils.isEmpty(cat)) {
+                } else {
+                    item.setCategory(em.find(Category.class, Integer.valueOf(cat)));
+                }
             } else {
-                item.setCategory(em.find(Category.class, Integer.valueOf(cat)));
+                item.setCategory(em.find(Category.class, Integer.valueOf(subCat)));
             }
             final String brand = readString(input, "brand");
-            if (!StringUtils.isEmpty(brand)) {
+            if (StringUtils.isEmpty(brand)) {
+            } else {
                 item.setBrand(em.find(Brand.class, Integer.valueOf(brand)));
             }
             if (null == item.getId()) {
@@ -168,7 +172,8 @@ public class ItemRest {
 
     private Boolean readBoolean(final MultipartFormDataInput input, final String param) {
         try {
-            return Boolean.valueOf(input.getFormDataMap().get(param).get(0).getBodyAsString());
+            final String bodyAsString = input.getFormDataMap().get(param).get(0).getBodyAsString();
+            return "ON".equalsIgnoreCase(bodyAsString);
         } catch (Exception ex) {
             return Boolean.FALSE;
         }
