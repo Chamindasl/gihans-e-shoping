@@ -4,7 +4,7 @@ app.controller("LoginCtrl", ['$scope', '$http', '$location', 'loginService', 'vo
 
     $scope.userSignup = function (user) {
       voService.setSignupUser(user);
-      $location.path('user/add');
+      $location.path('user/signup');
     };
 
     $scope.adminLogin = function (user) {
@@ -19,7 +19,7 @@ app.controller("LoginCtrl", ['$scope', '$http', '$location', 'loginService', 'vo
                 } else if ($scope.user.role.name === 'Admin' || $scope.user.role.name === 'User') {
                   $location.path('admin-dashboard');
                 } else {
-                  $location.path('');
+                  $location.path('index');
                 }
               }).
               error(function (data, status, headers, config) {

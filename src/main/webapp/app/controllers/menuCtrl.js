@@ -14,7 +14,9 @@ app.controller("MenuCtrl", ['$scope', '$rootScope', '$http', '$location', 'menuS
           } else if (user && user.role.name === 'User') {
             $scope.menus = menuService.getUserMenus();
           } else {
-            $location.path('admin');
+            if ($location.path() !== '/user/signup') {
+              $location.path('admin');
+            }
           }
         });
       } else {
