@@ -8,16 +8,17 @@
           <tr class="cart_menu">
             <td >Item</td>
             <td >.</td>
-            <td>Price</td>
+            <td class="pull-right">Price</td>
             <td>Quantity</td>
-            <td>Total</td>
+            <td class="pull-right">Total</td>
             <td>.</td>
           </tr>
-          <tr ng-repeat="ci in indexVO.cartItems">
+          <tr ng-repeat="ci in indexVO.cartItems" ng-class="{'danger' : (ci.stock-ci.noOfItems<0)}">
             <td>
               <a href=""><img src="{{ci.cartImage}}" alt=""></a>
             </td>
             <td>
+              <h4 ng-show="(ci.stock-ci.noOfItems<0)">This Item would not be available for your order,<br>But we might be able to deliver</h4>
               <h4><a href="">{{ci.name}}</a></h4>
             </td>
             <td>

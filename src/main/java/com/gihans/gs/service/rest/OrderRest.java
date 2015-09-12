@@ -5,10 +5,8 @@
  */
 package com.gihans.gs.service.rest;
 
-import com.gihans.gs.model.Category;
 import com.gihans.gs.model.ClientOrder;
 import com.gihans.gs.model.OrderItem;
-import com.gihans.gs.model.vo.CategoryVO;
 import com.gihans.gs.model.vo.IndexVO;
 import com.gihans.gs.model.vo.ItemVO;
 import com.gihans.gs.model.Item;
@@ -68,6 +66,10 @@ public class OrderRest {
         final Date date = new Date();
         if (paymentStatus == ClientOrder.PaymentStatus.RECEIVED) {
             co.setPaymentReceivedDate(date);
+            for (final OrderItem oi : co.getOrderItemList()) {
+                final Item item = oi.getItem();
+                item.setStock(item.getStock() - oi.getQuantity());
+            }
         }
         if (orderStatus == ClientOrder.OrderStatus.DELIVERED) {
             co.setDeliveredData(date);

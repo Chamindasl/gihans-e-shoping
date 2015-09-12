@@ -24,19 +24,22 @@
         <th class="">Image</th>
         <th>Id</th>
         <th>Name</th>
-        <th>Price</th>
+        <th class="text-right">Price</th>
+        <th class="text-right">Stock</th>
         <th>New</th>
         <th>On Sale</th>
         <th>Featured</th>
         <th>Related Items</th>
         <th>Category</th>
         <th>Brand</th>
+        <th>Edit</th>
         </thead>
-        <tr  class="success" dir-paginate="i in items| orderBy : ['brandVO.name', 'categoryVO.name', 'id'] | filter:searchText | itemsPerPage: 15">
-          <td><img src="{{i.indexImage}}" alt="No Img"></td>
-          <td>{{ i.id}}</td>
-          <td>{{ i.name}}</td>
-          <td class="text-right">{{ i.price}}</td>
+        <tr  class="success" ng-class="{'danger' : (i.stock<=0)}" dir-paginate="i in items| orderBy : ['brandVO.name', 'categoryVO.name', 'id'] | filter:searchText | itemsPerPage: 15">
+          <td><img src="{{i.cartImage}}" alt="No Img"></td>
+          <td>{{i.id}}</td>
+          <td>{{i.name}}</td>
+          <td class="text-right">{{i.price}}</td>
+          <td class="text-right">{{i.stock}}</td>
           <td>{{i.freshTxt}}</td>
           <td>{{i.saleTxt}}</td>
           <td>{{i.featuredTxt}}</td>
