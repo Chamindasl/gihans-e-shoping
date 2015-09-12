@@ -126,7 +126,7 @@ public class UserRest {
     @Produces("application/json")
     @Consumes("application/json")
     public Response loginUser(final UserVO userVo, @Context final HttpServletRequest request) {
-        final TypedQuery<User> query = em.createQuery("select u from User u where u.email=:email and u.password=:password", User.class);
+        final TypedQuery<User> query = em.createQuery("select u from User u where u.email=:email and u.password=:password and u.active=TRUE", User.class);
         query.setParameter("email", userVo.email);
         query.setParameter("password", getMD5Password(userVo.password));
         final List<User> users = query.getResultList();

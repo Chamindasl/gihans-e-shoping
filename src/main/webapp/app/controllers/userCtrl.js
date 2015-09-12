@@ -124,7 +124,7 @@ app.controller("UserCtrl", ['$scope', '$rootScope', '$http', '$location', 'voSer
         $http.post('http://localhost:8080/gihans-e-shoping/rest/user', $scope.user)
                 .success(function (data, status, header, config) {
                   if ($scope.requestFromUser) {
-                    $location.path("customer/login/after-signup");
+                    $location.path("customer/login/after-sign");
                   } else {
                     $location.path("user/list");
                   }

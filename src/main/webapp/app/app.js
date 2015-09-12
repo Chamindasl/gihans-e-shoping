@@ -38,6 +38,10 @@ app.config(['$routeProvider',
               templateUrl: 'views/user.html',
               controller: 'UserCtrl'
             }).
+            when('/user/signup', {
+              templateUrl: 'views/user.html',
+              controller: 'UserCtrl'
+            }).
             when('/user/list', {
               templateUrl: 'views/user-list.html',
               controller: 'UserCtrl'
@@ -79,6 +83,10 @@ app.config(['$routeProvider',
               }
             }).
             when('/order', {
+              templateUrl: 'views/order-list.html',
+              controller: 'OrderCtrl'
+            }).
+            when('/myOrder', {
               templateUrl: 'views/order-list.html',
               controller: 'OrderCtrl'
             }).
