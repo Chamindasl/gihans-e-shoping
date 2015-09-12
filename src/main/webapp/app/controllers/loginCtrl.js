@@ -5,6 +5,7 @@ app.controller("LoginCtrl", ['$scope', '$http', '$location', 'loginService', 'vo
     $scope.userSignup = function (user) {
       voService.setSignupUser(user);
       $location.path('user/signup');
+      //change here
     };
 
     $scope.adminLogin = function (user) {
